@@ -34,6 +34,7 @@
     margin: 1px;
     border-radius: 3px;
     background-color: rgb(211, 13, 129);
+    transition: 1s;
 }
 
 .placedScout {
@@ -43,6 +44,7 @@
     margin: 1px;
     border-radius: 3px;
     background-color: rgb(184, 125, 48);
+    transition: 1s;
 }
 
 .computerTank {
@@ -52,6 +54,7 @@
     margin: 1px;
     border-radius: 3px;
     background-color: rgb(36, 72, 231);
+    transition: 1s;
 }
 
 .computerScout {
@@ -61,4 +64,5 @@
     margin: 1px;
     border-radius: 3px;
     background-color: rgb(42, 190, 99);
+    transition: 1s;
 }
