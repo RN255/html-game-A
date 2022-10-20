@@ -10,13 +10,20 @@ let scoutPlaced = false;
 let gameRunning = true;
 
 //Player scout info
-let scoutLocation = "0"
+let scoutLocation = 0
 let scoutMoved = 0;
 
 //player Tank info
-let tankLocation = "0"
+let tankLocation = 0
 let tankMoved = 0;
 let tankHasShot = 0;
+
+//computer unit info
+let computerScoutLocation = 0;
+let computerScoutMoved = false;
+let computerTankLocation = 0;
+let computerTankMoved = false;
+
 
 //restart game function
 restart.addEventListener("click", restartFunc);
@@ -32,9 +39,10 @@ function restartFunc() {
     computerScoutHp = 100;
     scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
     scoutMoved = 0;
-    scoutLocation = "0"
-    tankMoved = 0
-    tankHasShot = 0
+    scoutLocation = "0";
+    tankMoved = 0;
+    tankHasShot = 0;
+    computerScoutMoved = false;
 }
 }
 
@@ -66,25 +74,35 @@ function compPlaceTank () {
     if (squares[rand].className == "square") {
         squares[rand].className = "computerTank";
         squares[rand].innerHTML = "computer tank";
+        computerTankLocation = rand;
     }
 }
 
 //player places scout
 function playerPlaceScout(i) {
-    squares[i].className = "placedScout";
-    scoutPlaced = true;
-    squares[i].innerHTML = "player scout";
-    scoutLocation = i;
-    notes.innerHTML = "scout: " + scoutMoved + "tank: " + tankMoved;
+    if (squares[i].className == "square") {
+        squares[i].className = "placedScout";
+        scoutPlaced = true;
+        squares[i].innerHTML = "player scout";
+        scoutLocation = i;
+        notes.innerHTML = scoutLocation;
+    } else {
+        playerPlaceScout(i);
+    }
+        
 }
 
 //computer places scout
 function compPlaceScout(i) {
     let rand = Math.floor(Math.random() * 100);
-        if (squares[rand].className == "square") {
-            squares[rand].className = "computerScout";
-            squares[rand].innerHTML = "computer scout";
-        }
+    // notes.innerHTML = "why sometimes absent?" + rand;
+    if (squares[rand].className == "square") {
+        squares[rand].className = "computerScout";
+        squares[rand].innerHTML = "computer scout";
+        computerScoutLocation =  rand;
+    } else {
+        compPlaceScout(i)
+    }
 }
 
 // change location of scout
@@ -128,10 +146,80 @@ function tankMove(i) {
         squares[i].innerHTML = "player tank";
         tankLocation = i;
         tankMoved ++;
-        resetMove();
+        // CompueterScoutMove();
+        // resetMove();
     } 
     
 }  
+
+//computer scout move
+function CompueterScoutMove () {
+
+    // computerScoutMoved = false;
+
+
+    // notes.innerHTML = moveChoice;
+
+    // if location is divisible by 9 give him the 5 options.
+    // if location is divisible by 10 also give him the 5 options
+
+    let moveChoiceNumber = 0;
+    // notes.innerHTML = "array" + moveChoices.toString();
+
+    if ((computerScoutLocation +1 ) % 10 == 0) {
+        const optionOne = [-1, 10, -10, 9, -11];
+        var index = Math.floor(Math.random() * optionOne.length);
+        moveChoiceNumber = optionOne[index];
+        notes.innerHTML = "option 1 " + computerScoutLocation % 9 + "location:" + computerScoutLocation;
+
+        // notes.innerHTML = "array" + moveChoices.toString();
+    } else if (computerScoutLocation % 10 == 0) {
+        const optionTwo = [1, 10, -10, 11, -9];
+        var index = Math.floor(Math.random() * optionTwo.length);
+        moveChoiceNumber = optionTwo[index];
+        notes.innerHTML = "option 2 " + computerScoutLocation % 10 + "location:" + computerScoutLocation;
+        // notes.innerHTML = "array" + moveChoices.toString();
+    } else { 
+        // moveChoices.push(1);
+        const optionThree = [1, -1, 10, -10, 11, 9, -11, -9];
+        var index = Math.floor(Math.random() * optionThree.length);
+        moveChoiceNumber = optionThree[index];
+        notes.innerHTML = "option 3 " + computerScoutLocation;
+        // notes.innerHTML = "array" + moveChoices.toString();
+    }    
+
+    
+    let moveChoice = computerScoutLocation + moveChoiceNumber;
+    notes.innerHTML = moveChoice;
+
+    if (moveChoice >= 0 && moveChoice <= 100){
+        if (squares[moveChoice].className == "square") {
+            squares[computerScoutLocation].className = "square";
+            squares[computerScoutLocation].innerHTML = "";
+            squares[moveChoice].className = "computerScout";
+            squares[moveChoice].innerHTML = "computer scout";
+            computerScoutLocation = moveChoice;
+            // computerScoutMoved = true;
+            // notes.innerHTML = computerScoutLocation;
+    
+            setTimeout(CompueterScoutMove, 100);
+            // computerScoutMoved = true;
+    
+        } else {
+            setTimeout(CompueterScoutMove, 100);    
+        }
+    } else {
+        setTimeout(CompueterScoutMove, 100); 
+    }
+
+    
+    
+    }
+      
+     
+
+
+
 
 //reset move
 function resetMove() {
@@ -218,8 +306,14 @@ for (let i = 0; i < squares.length; i++) {
                 tankMove (i);
             }
 
+            else {
+                CompueterScoutMove();
+                
+            }     
            
-           
+
+
+
         } 
         
         else {
