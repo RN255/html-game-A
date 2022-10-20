@@ -13,6 +13,11 @@ let gameRunning = true;
 let scoutLocation = "0"
 let scoutMoved = 0;
 
+//player Tank info
+let tankLocation = "0"
+let tankMoved = 0;
+let tankHasShot = 0;
+
 //restart game function
 restart.addEventListener("click", restartFunc);
 function restartFunc() {
@@ -26,8 +31,10 @@ function restartFunc() {
     Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
     computerScoutHp = 100;
     scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
-    scoutMoved = false;
+    scoutMoved = 0;
     scoutLocation = "0"
+    tankMoved = 0
+    tankHasShot = 0
 }
 }
 
@@ -50,6 +57,7 @@ function playerPlaceTank(i) {
     squares[i].className = "placedTank";
     tankPlaced = true;
     squares[i].innerHTML = "player tank";
+    tankLocation = i;
 }
 
 // computer places tank
@@ -67,7 +75,7 @@ function playerPlaceScout(i) {
     scoutPlaced = true;
     squares[i].innerHTML = "player scout";
     scoutLocation = i;
-    notes.innerHTML = scoutLocation
+    notes.innerHTML = "scout: " + scoutMoved + "tank: " + tankMoved;
 }
 
 //computer places scout
@@ -80,19 +88,56 @@ function compPlaceScout(i) {
 }
 
 // change location of scout
-function scoutNewLocation(i) {
-    squares[scoutLocation].className = "square";
-    squares[scoutLocation].innerHTML = "";
-    squares[i].className = "placedScout";
-    squares[i].innerHTML = "player scout";
-    scoutLocation = i;
-    scoutMoved ++;
+function scoutMove(i) {
+    if (canUnitMove(i, scoutLocation) && squares[i].className == "square") {
+        squares[scoutLocation].className = "square";
+        squares[scoutLocation].innerHTML = "";
+        squares[i].className = "placedScout";
+        squares[i].innerHTML = "player scout";
+        scoutLocation = i;
+        scoutMoved ++;
+    } 
 }
 
-function unitMove(i, unitLocation) {
-    if (canUnitMove(i, unitLocation)) {
-        scoutNewLocation(i);
+// change location of tank
+function tankShoot(i) {
+    if (squares[i].className == "computerTank") {
+        computerTankHp -= 50;
+        Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
+        tankAlive(i);
+        gameOver();
+        tankHasShot ++;
+    } else if (squares[i].className == "computerScout") {
+        computerScoutHp -= 50;
+        scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
+        scoutAlive(i);
+        gameOver();
+        tankHasShot ++;
+    } else {
+        squares[i].className = "clicked";
+        tankHasShot ++;
+    }
+}
+  
+// change location of tank
+function tankMove(i) {
+    if (canUnitMove(i, tankLocation)) {
+        squares[tankLocation].className = "square";
+        squares[tankLocation].innerHTML = "";
+        squares[i].className = "placedTank";
+        squares[i].innerHTML = "player tank";
+        tankLocation = i;
+        tankMoved ++;
+        resetMove();
     } 
+    
+}  
+
+//reset move
+function resetMove() {
+    scoutMoved = 0;
+    tankMoved = 0;
+    tankHasShot = 0;
 }
 
 //test to see if unit can move
@@ -100,28 +145,20 @@ function canUnitMove(i, unitLocation) {
     switch (unitLocation - i) {
         case 1:
             return true;
-
         case -1:
             return true;
-
         case 10:
             return true;
-
         case -10:
             return true;
-
         case 11:
-            return true;
-            
+            return true;         
         case 9:
-            return true;
-        
+            return true;       
         case -11:
             return true;
-
         case -9:
             return true;
-
     }}
         
 
@@ -158,42 +195,31 @@ for (let i = 0; i < squares.length; i++) {
     squares[i].onclick = () => {
         if (gameRunning == true) {
 
-            if (tankPlaced == false && squares[i].className == "square") {
+            if (tankPlaced == false) {
                 playerPlaceTank(i);
                 setTimeout(compPlaceTank, 100);
             } 
             
-            else if (scoutPlaced == false && squares[i].className == "square") {
+            else if (scoutPlaced == false) {
                 playerPlaceScout(i);
                 setTimeout(compPlaceScout, 100);
                 
             } 
             
-            else if (scoutMoved < 2 && squares[i].className == "square") {
-                unitMove (i, scoutLocation);
+            else if (scoutMoved < 2) {
+                scoutMove (i);
             }
-            
 
+            else if (tankHasShot < 1) {
+                tankShoot(i);
+            }
 
-            else if (squares[i].className == "computerTank") {
-                    computerTankHp -= 50;
-                    Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
-                    tankAlive(i);
-                    gameOver();
-    
-            } 
-            
-            else if (squares[i].className == "computerScout" && gameRunning == true) {
-                    computerScoutHp -= 50;
-                    scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
-                    scoutAlive(i);
-                    gameOver();
-    
-            } 
-            
-            else { if (squares[i].className == "square") { 
-                squares[i].className = "clicked";
-            } }
+            else if (tankMoved < 1) {
+                tankMove (i);
+            }
+
+           
+           
         } 
         
         else {
