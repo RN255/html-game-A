@@ -1,5 +1,6 @@
 const squares = document.querySelectorAll(".square");
 const Hpannounce = document.getElementById("announce");
+const notes = document.getElementById("notes");
 const scoutHpannounce = document.getElementById("announceTwo");
 const restart = document.getElementById("restartButton");
 
@@ -7,6 +8,10 @@ const restart = document.getElementById("restartButton");
 let tankPlaced = false;
 let scoutPlaced = false;
 let gameRunning = true;
+
+//Player scout info
+let scoutLocation = "0"
+let scoutMoved = 0;
 
 //restart game function
 restart.addEventListener("click", restartFunc);
@@ -21,6 +26,8 @@ function restartFunc() {
     Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
     computerScoutHp = 100;
     scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
+    scoutMoved = false;
+    scoutLocation = "0"
 }
 }
 
@@ -59,6 +66,8 @@ function playerPlaceScout(i) {
     squares[i].className = "placedScout";
     scoutPlaced = true;
     squares[i].innerHTML = "player scout";
+    scoutLocation = i;
+    notes.innerHTML = scoutLocation
 }
 
 //computer places scout
@@ -69,6 +78,53 @@ function compPlaceScout(i) {
             squares[rand].innerHTML = "computer scout";
         }
 }
+
+// change location of scout
+function scoutNewLocation(i) {
+    squares[scoutLocation].className = "square";
+    squares[scoutLocation].innerHTML = "";
+    squares[i].className = "placedScout";
+    squares[i].innerHTML = "player scout";
+    scoutLocation = i;
+    scoutMoved ++;
+}
+
+function unitMove(i, unitLocation) {
+    if (canUnitMove(i, unitLocation)) {
+        scoutNewLocation(i);
+    } 
+}
+
+//test to see if unit can move
+function canUnitMove(i, unitLocation) {
+    switch (unitLocation - i) {
+        case 1:
+            return true;
+
+        case -1:
+            return true;
+
+        case 10:
+            return true;
+
+        case -10:
+            return true;
+
+        case 11:
+            return true;
+            
+        case 9:
+            return true;
+        
+        case -11:
+            return true;
+
+        case -9:
+            return true;
+
+    }}
+        
+
 
 //check tank is alive
 function tankAlive(i) {
@@ -100,28 +156,50 @@ function gameOver() {
 // game loop
 for (let i = 0; i < squares.length; i++) {
     squares[i].onclick = () => {
-        if (tankPlaced == false && squares[i].className == "square" && gameRunning == true) {
-            playerPlaceTank(i);
-            setTimeout(compPlaceTank, 100);
-        } else if (scoutPlaced == false && squares[i].className == "square" && gameRunning == true) {
-            playerPlaceScout(i);
-            setTimeout(compPlaceScout, 100);
+        if (gameRunning == true) {
+
+            if (tankPlaced == false && squares[i].className == "square") {
+                playerPlaceTank(i);
+                setTimeout(compPlaceTank, 100);
+            } 
             
-        } else if (squares[i].className == "computerTank" && gameRunning == true) {
-                computerTankHp -= 50;
-                Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
-                tankAlive(i);
-                gameOver();
+            else if (scoutPlaced == false && squares[i].className == "square") {
+                playerPlaceScout(i);
+                setTimeout(compPlaceScout, 100);
+                
+            } 
+            
+            else if (scoutMoved < 2 && squares[i].className == "square") {
+                unitMove (i, scoutLocation);
+            }
+            
 
-        } else if (squares[i].className == "computerScout" && gameRunning == true) {
-                computerScoutHp -= 50;
-                scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
-                scoutAlive(i);
-                gameOver();
 
-        } else { if (squares[i].className == "square" && gameRunning == true) { 
-            squares[i].className = "clicked";
+            else if (squares[i].className == "computerTank") {
+                    computerTankHp -= 50;
+                    Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
+                    tankAlive(i);
+                    gameOver();
+    
+            } 
+            
+            else if (squares[i].className == "computerScout" && gameRunning == true) {
+                    computerScoutHp -= 50;
+                    scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
+                    scoutAlive(i);
+                    gameOver();
+    
+            } 
+            
+            else { if (squares[i].className == "square") { 
+                squares[i].className = "clicked";
+            } }
         } 
+        
+        else {
+            return;
+        }
+        
     }
 }
-}
+
