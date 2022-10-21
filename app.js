@@ -5,6 +5,8 @@ const notes = document.getElementById("notes");
 const scoutHpannounce = document.getElementById("announceTwo");
 const restart = document.getElementById("restartButton");
 
+const announceThree = document.getElementById("announceThree");
+const announceFour = document.getElementById("announceFour");
 
 // start of game
 let gameRunning = true;
@@ -13,26 +15,39 @@ let gameRunning = true;
 let scoutPlaced = false;
 let scoutLocation = 0
 let scoutMoved = 0;
+let playerScoutHp = 100;
+let playerScoutAlive = true;
 
 //player Tank info
 let tankPlaced = false;
 let tankLocation = 0
 let tankMoved = 0;
 let tankHasShot = 0;
+let playerTankHp = 100;
+let playerTankAlive = true;
 
 //computer scout info
 let computerScoutLocation = 0;
 let computerScoutMoved = false;
 let computerScoutHp = 100;
 let computerScoutAlive = true;
-scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
+// scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
 
 //computer tank info
 let computerTankHp = 100;
 let computerTankLocation = 0;
 let computerTankMoved = false;
 let computerTankAlive = true;
-Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
+let computerTankHasShot = 0;
+// Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
+
+//update infor function 
+function updateInfo() {
+    Hpannounce.innerHTML = "Enemy Tank HP: "+ computerTankHp;
+    scoutHpannounce.innerHTML = "Enemy Scout HP: "+ computerScoutHp;
+    announceThree.innerHTML = "Player Tank HP: "+ playerTankHp;
+    announceFour.innerHTML = "Player Tank HP: "+ playerScoutHp;
+}
 
 
 //restart game function
@@ -56,13 +71,16 @@ function restartFunc() {
     //reset computer scout info
     computerScoutMoved = false;
     computerScoutLocation = 0;
+    computerScoutAlive = true;
     computerScoutHp = 100;
-    scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
+    // scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
     //reset computer tank info
     computerTankHp = 100;
     computerTankLocation = 0;
+    computerTankAlive = true;
     computerTankMoved = false;
-    Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
+    // Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
+    updateInfo() 
 }
 }
 
@@ -124,23 +142,58 @@ function scoutMove(i) {
     } 
 }
 
-// shoot tank
+// player shoot tank
 function tankShoot(i) {
     if (squares[i].className == "computerTank") {
         computerTankHp -= 50;
-        Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
+        // Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
+        updateInfo();
         tankAlive(i);
         gameOver();
         tankHasShot ++;
     } else if (squares[i].className == "computerScout") {
         computerScoutHp -= 50;
-        scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
+        // scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
+        updateInfo();
         scoutAlive(i);
         gameOver();
         tankHasShot ++;
     } else {
-        squares[i].className = "clicked";
+        //could add in effect later
+        // squares[i].className = "clicked";
         tankHasShot ++;
+    }
+}
+
+// computer shoot tank
+function computerTankShoot() {
+    if (computerTankAlive == true) { 
+        let rand = Math.floor(Math.random() * 100);
+
+        if (squares[rand].className == "placedTank") {
+            playerTankHp -= 50;
+            // Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
+            updateInfo();
+            CheckPlayerTankAlive(rand);
+            gameOver();
+            computerTankHasShot ++;
+            setTimeout(CompueterTankMove, 500);
+        } else if (squares[rand].className == "placedScout") {
+            playerScoutHp -= 50;
+            // scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
+            updateInfo();
+            CheckPlayerScoutAlive(rand);
+            gameOver();
+            computerTankHasShot ++;
+            setTimeout(CompueterTankMove, 500);
+        } else {
+            //could add in effect later
+            squares[rand].className = "clicked";
+            computerTankHasShot ++;
+            setTimeout(CompueterTankMove, 500);
+        }
+    } else {
+        setTimeout(CompueterTankMove, 500);
     }
 }
   
@@ -155,10 +208,10 @@ function tankMove(i) {
         tankMoved ++;
         // computer moves scout then turn is reset
         // is this the best place to put this?
-        setTimeout(CompueterScoutMove, 100);
-        resetMove();
-    } 
-    
+        setTimeout(CompueterScoutMove, 500);
+        // setTimeout(CompueterScoutMove, 100);
+        // resetMove();
+    }   
 }  
 
 //computer scout move
@@ -189,6 +242,7 @@ function CompueterScoutMove () {
                 squares[moveChoice].className = "computerScout";
                 squares[moveChoice].innerHTML = "computer scout";
                 computerScoutLocation = moveChoice;
+                setTimeout(computerTankShoot, 500);
     
             } else {
                 CompueterScoutMove();    
@@ -196,8 +250,51 @@ function CompueterScoutMove () {
         } else {
             CompueterScoutMove(); 
         }
-    } 
+    } else {
+        computerTankShoot();
+    }
     }  
+
+//computer tank move
+function CompueterTankMove () {
+    if (computerTankAlive == true) {
+        let moveChoiceNumber = 0;
+        // set movement options depending on unit location and get choice
+        if ((computerTankLocation +1 ) % 10 == 0) {
+            const optionOne = [-1, 10, -10, 9, -11];
+            var index = Math.floor(Math.random() * optionOne.length);
+            moveChoiceNumber = optionOne[index];
+        } else if (computerTankLocation % 10 == 0) {
+            const optionTwo = [1, 10, -10, 11, -9];
+            var index = Math.floor(Math.random() * optionTwo.length);
+            moveChoiceNumber = optionTwo[index];
+        } else { 
+            const optionThree = [1, -1, 10, -10, 11, 9, -11, -9];
+            var index = Math.floor(Math.random() * optionThree.length);
+            moveChoiceNumber = optionThree[index];
+        }    
+        //detemine movement choice
+        let moveChoice = computerTankLocation + moveChoiceNumber;
+        // check move is possible
+        if (moveChoice >= 0 && moveChoice <= 99){
+            if (squares[moveChoice].className == "square") {
+                squares[computerTankLocation].className = "square";
+                squares[computerTankLocation].innerHTML = "";
+                squares[moveChoice].className = "computerTank";
+                squares[moveChoice].innerHTML = "computer tank";
+                computerTankLocation = moveChoice;
+                resetMove();    
+            } else {
+                CompueterTankMove();    
+            }
+        } else {
+            CompueterTankMove(); 
+        }
+    } else {
+        resetMove(); 
+    }
+    }  
+
 
 //reset turn
 function resetMove() {
@@ -227,23 +324,44 @@ function canUnitMove(i, unitLocation) {
             return true;
     }}
         
-//check tank is alive
+//check enemy tank is alive
 function tankAlive(i) {
     if (computerTankHp <= 0) {
         Hpannounce.innerHTML = "Tank HP: Tank is dead!";
         squares[i].className = "square";
         squares[i].innerHTML = "";
+        computerTankAlive = false;
 
     }
 }
 
-//check scout is alive
+//check enemy scout is alive
 function scoutAlive(i) {
     if (computerScoutHp <= 0) {
         scoutHpannounce.innerHTML = "Scout HP: Scout is dead!";
         squares[i].className = "square";
         squares[i].innerHTML = "";
         computerScoutAlive = false;
+    }
+}
+
+//check player tank is alive
+function CheckPlayerTankAlive(i) {
+    if (playerTankHp <= 0) {
+        announceThree.innerHTML = "Player Tank HP: Tank is dead!";
+        squares[i].className = "square";
+        squares[i].innerHTML = "";
+        playerTankAlive = false;
+    }
+}
+
+//check player scout is alive
+function CheckPlayerScoutAlive(i) {
+    if (playerScoutHp <= 0) {
+        announceFour.innerHTML = "Player Scout HP: Scout is dead!";
+        squares[i].className = "square";
+        squares[i].innerHTML = "";
+        playerScoutAlive = false;
     }
 }
 
@@ -254,6 +372,10 @@ function gameOver() {
         gameRunning = false;
     }
 }
+
+
+//display info before game begins
+updateInfo() 
 
 // game loop
 for (let i = 0; i < squares.length; i++) {
@@ -268,7 +390,6 @@ for (let i = 0; i < squares.length; i++) {
             else if (scoutPlaced == false) {
                 playerPlaceScout(i);
                 setTimeout(compPlaceScout, 100);
-                
             } 
             
             else if (scoutMoved < 2) {
@@ -281,24 +402,20 @@ for (let i = 0; i < squares.length; i++) {
 
             else if (tankMoved < 1) {
                 tankMove (i);
+                // yes, they are called from inside the computer moves as
+                // if we did it here we would need another click
+                // also, up there it comes in sequence, not in one go
+                // setTimeout(CompueterScoutMove, 500);
+                // setTimeout(CompueterTankMove, 500);
+                // resetMove();
             }
-
             // this is not actually being called, it is called above, could change...
-            else {
-                CompueterScoutMove();
-            }
-                
-            
-           
-
-
-
+            // else {
+            //     CompueterScoutMove();
+            // }
         } 
-        
-        else {
-            return;
-        }
-        
+        // else {
+        //     return;
+        // } 
     }
 }
-
