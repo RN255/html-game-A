@@ -44,7 +44,8 @@
     margin: 1px;
     border-radius: 3px;
     background-color: rgb(184, 125, 48);
-    /* transition: 1s; */
+    transition: 1s;
+    /* transform: translate(54px, 54px); */
 }
 
 .computerTank {
