@@ -47,6 +47,7 @@ function updateInfo() {
   scoutHpannounce.innerHTML = "Enemy Scout HP: " + computerScoutHp;
   announceThree.innerHTML = "Player Tank HP: " + playerTankHp;
   announceFour.innerHTML = "Player Tank HP: " + playerScoutHp;
+  notes.innerHTML = "info: ";
 }
 
 //restart game function
@@ -92,7 +93,7 @@ function playerPlaceTank(i) {
   tankPlaced = true;
   // squares[i].innerHTML = "player tank";
   tankLocation = i;
-  WhereCanIMove();
+  // WhereCanIMove();
 }
 
 // computer places tank
@@ -126,6 +127,7 @@ function compPlaceScout() {
     squares[rand].className = "computerScout";
     // squares[rand].innerHTML = "computer scout";
     computerScoutLocation = rand;
+    WhereCanIMoveScout();
   } else {
     compPlaceScout();
   }
@@ -134,13 +136,15 @@ function compPlaceScout() {
 // move and fire units
 // player change location of scout
 function scoutMove(i) {
-  if (canUnitMove(i, scoutLocation) && squares[i].className == "square") {
+  if (canUnitMove(i, scoutLocation) && squares[i].className == "nearBy") {
     squares[scoutLocation].className = "square";
     squares[scoutLocation].innerHTML = "";
     squares[i].className = "placedScout";
     // squares[i].innerHTML = "player scout";
     scoutLocation = i;
     scoutMoved++;
+    notes.innerHTML = "info: Fire artillery!";
+    clearNearBy();
   }
 }
 
@@ -197,6 +201,7 @@ function squareHit(i) {
 // player shoot tank
 function tankShoot(i) {
   if (squares[i].className == "computerTank") {
+    gameRunning = false;
     computerTankHp -= 50;
     // Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
     squareHit(i);
@@ -204,7 +209,10 @@ function tankShoot(i) {
     tankAlive(i);
     gameOver();
     tankHasShot++;
+    notes.innerHTML = "info: ";
+    setTimeout(WhereCanIMove, 500);
   } else if (squares[i].className == "computerScout") {
+    gameRunning = false;
     computerScoutHp -= 50;
     // scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
     squareHit(i);
@@ -212,11 +220,16 @@ function tankShoot(i) {
     scoutAlive(i);
     gameOver();
     tankHasShot++;
+    notes.innerHTML = "info: ";
+    setTimeout(WhereCanIMove, 500);
   } else {
+    gameRunning = false;
     //could add in effect later
     // squares[i].className = "clicked";
     tankHasShot++;
     squareHit(i);
+    notes.innerHTML = "info: ";
+    setTimeout(WhereCanIMove, 500);
   }
 }
 
@@ -257,7 +270,7 @@ function computerTankShoot() {
 
 // change location of tank
 function tankMove(i) {
-  if (canUnitMove(i, tankLocation)) {
+  if (canUnitMove(i, tankLocation) && squares[i].className == "nearBy") {
     squares[tankLocation].className = "square";
     squares[tankLocation].innerHTML = "";
     squares[i].className = "placedTank";
@@ -265,7 +278,7 @@ function tankMove(i) {
     tankLocation = i;
     tankMoved++;
     clearNearBy();
-    WhereCanIMove();
+    // WhereCanIMove();
     // computer moves scout then turn is reset
     // is this the best place to put this?
     setTimeout(CompueterScoutMove, 500);
@@ -283,6 +296,62 @@ function clearNearBy() {
       squares[i].className = "square";
     }
   }
+}
+
+function WhereCanIMoveScout() {
+  if ((scoutLocation + 1) % 10 == 0) {
+    for (let i = 0; i < squares.length; i++) {
+      if (
+        i == scoutLocation - 1 ||
+        i == scoutLocation + 10 ||
+        i == scoutLocation - 10 ||
+        i == scoutLocation + 9 ||
+        i == scoutLocation - 11
+      ) {
+        squares[i].className = "nearBy";
+      }
+    }
+  } else if (scoutLocation % 10 == 0) {
+    for (let i = 0; i < squares.length; i++) {
+      if (
+        i == scoutLocation + 1 ||
+        i == scoutLocation + 10 ||
+        i == scoutLocation - 10 ||
+        i == scoutLocation + 11 ||
+        i == scoutLocation - 9
+      ) {
+        squares[i].className = "nearBy";
+      }
+    }
+  } else {
+    for (let i = 0; i < squares.length; i++) {
+      if (
+        (i == scoutLocation + 1 ||
+          i == scoutLocation - 1 ||
+          i == scoutLocation + 10 ||
+          i == scoutLocation - 10 ||
+          i == scoutLocation + 11 ||
+          i == scoutLocation + 9 ||
+          i == scoutLocation - 11 ||
+          i == scoutLocation - 9) &&
+        squares[i].className == "square"
+      ) {
+        squares[i].className = "nearBy";
+      }
+    }
+  }
+  gameRunning = true;
+  gameOver();
+
+  // if ((tankLocation + 1) % 10 == 0) {
+  //     const optionOne = [-1, 10, -10, 9, -11];
+  // }
+
+  // else if (tankLocation % 10 == 0) {
+  //     const optionTwo = [1, 10, -10, 11, -9];
+  // } else {
+  //     const optionThree = [1, -1, 10, -10, 11, 9, -11, -9];
+  // }
 }
 
 function WhereCanIMove() {
@@ -327,6 +396,8 @@ function WhereCanIMove() {
       }
     }
   }
+  gameRunning = true;
+  gameOver();
 
   // if ((tankLocation + 1) % 10 == 0) {
   //     const optionOne = [-1, 10, -10, 9, -11];
@@ -407,6 +478,7 @@ function CompueterTankMove() {
         squares[moveChoice].className = "computerTank";
         // squares[moveChoice].innerHTML = "computer tank";
         computerTankLocation = moveChoice;
+        WhereCanIMoveScout();
         resetMove();
       } else {
         CompueterTankMove();
@@ -492,6 +564,7 @@ function CheckPlayerScoutAlive(i) {
 function gameOver() {
   if (computerScoutHp <= 0 && computerTankHp <= 0) {
     scoutHpannounce.innerHTML = "Scout HP: Scout is dead! - GAME OVER DUDE!";
+    clearNearBy();
     gameRunning = false;
   }
 }
@@ -509,7 +582,7 @@ for (let i = 0; i < squares.length; i++) {
       } else if (scoutPlaced == false) {
         playerPlaceScout(i);
         setTimeout(compPlaceScout, 100);
-      } else if (scoutMoved < 0) {
+      } else if (scoutMoved < 1) {
         scoutMove(i);
       } else if (tankHasShot < 1) {
         tankShoot(i);
