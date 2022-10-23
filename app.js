@@ -98,18 +98,23 @@ function playerPlaceTank(i) {
 
 // computer places tank
 function compPlaceTank() {
-  const optionsList = [
-    +42, +45, +47, +51, +63, +79, -42, -45, -47, -51, -63, -79,
-  ];
-  var index = Math.floor(Math.random() * optionsList.length);
-  tankPlacementChoiceNumber = optionsList[index];
-  placementAttemp = tankLocation + tankPlacementChoiceNumber;
+  if (tankLocation <= 50) {
+    const optionsList = [+31, +37, +42, +45, +47];
+    var index = Math.floor(Math.random() * optionsList.length);
+    tankPlacementChoiceNumber = optionsList[index];
+    placementAttempt = tankLocation + tankPlacementChoiceNumber;
+  } else if (tankLocation > 50) {
+    const optionsList = [-31, -37, -42, -45, -47];
+    var index = Math.floor(Math.random() * optionsList.length);
+    tankPlacementChoiceNumber = optionsList[index];
+    placementAttempt = tankLocation + tankPlacementChoiceNumber;
+  }
 
   if (
-    0 <= placementAttemp <= 99 &&
-    squares[placementAttemp].className == "square"
+    0 <= placementAttempt <= 99 &&
+    squares[placementAttempt].className == "square"
   ) {
-    computerTankLocation = placementAttemp;
+    computerTankLocation = placementAttempt;
   } else {
     compPlaceTank();
   }
@@ -139,18 +144,31 @@ function playerPlaceScout(i) {
 //computer places scout
 function compPlaceScout() {
   notes.innerHTML = "we got here";
-  const optionsList = [
-    +32, +35, +37, +41, +53, +69, -32, -35, -37, -41, -53, -69,
-  ];
-  var index = Math.floor(Math.random() * optionsList.length);
-  scoutPlacementChoiceNumber = optionsList[index];
-  placementAttemp = tankLocation + scoutPlacementChoiceNumber;
-  notes.innerHTML = scoutPlacementChoiceNumber + " " + placementAttemp;
 
-  if (0 <= placementAttemp <= 99) {
-    if (squares[placementAttemp].className == "square") {
-      notes.innerHTML = "we also got here";
-      computerScoutLocation = placementAttemp;
+  if (tankLocation <= 50) {
+    const optionsList = [+31, +37, +42, +45, +47];
+    var index = Math.floor(Math.random() * optionsList.length);
+    tankPlacementChoiceNumber = optionsList[index];
+    placementAttempt = tankLocation + tankPlacementChoiceNumber;
+  } else if (tankLocation > 50) {
+    const optionsList = [-31, -37, -42, -45, -47];
+    var index = Math.floor(Math.random() * optionsList.length);
+    tankPlacementChoiceNumber = optionsList[index];
+    placementAttempt = tankLocation + tankPlacementChoiceNumber;
+  }
+
+  // const optionsList = [
+  //   +32, +35, +37, +41, +53, +69, -32, -35, -37, -41, -53, -69,
+  // ];
+  // var index = Math.floor(Math.random() * optionsList.length);
+  // scoutPlacementChoiceNumber = optionsList[index];
+  // let placementAttempt = tankLocation + scoutPlacementChoiceNumber;
+  notes.innerHTML = tankPlacementChoiceNumber + " " + placementAttempt;
+
+  if (0 <= placementAttempt <= 99) {
+    if (squares[placementAttempt].className == "square") {
+      // notes.innerHTML = "we also got here";
+      computerScoutLocation = placementAttempt;
       squares[computerScoutLocation].className = "computerScout";
       WhereCanIMoveScout();
       revealArtillery();
