@@ -18,3 +18,13 @@ creating a html game
 - need unique explosions for when my units are hit
 - some things dont reset when we press reset, the enemy tank respawns
 - the computer keeps attacking his own units, and i can do it to...
+
+- GAME STYLE 1 - shoot and scoot
+
+  - artillery is hidden then revealed when it fires
+  - kill the artillery to win
+  - the scout doesnt die but can be used to try and find the artillery, if within range it will be seen
+
+    - problems - the computer tank is moving on top of me
+
+    - computer cannot read minus class numbers are runs an error, needs fixing
