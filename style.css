@@ -1,15 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap");
 
 * {
   padding: 0;
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: black;
 }
 
 .headings {
   /* display: grid; */
   /* grid-template-columns: auto auto auto; */
-  background-color: #2196f320;
+  /* background-color: #2196f320; */
+  background-image: url(/images/camo.jpg);
   height: 50px;
   width: 540px;
   margin: 10px auto;
@@ -18,8 +23,9 @@
 
 #headingsText {
   text-align: center;
-  padding: 10px
-
+  padding: 5px;
+  color: white;
+  font-size: 25px;
 }
 
 .grid {
@@ -28,6 +34,8 @@
   width: 540px;
   margin: auto;
   /* background-color: #ccffcc; */
+  /* background-color: #ccffcc; */
+  background-image: url(/images/camo.jpg);
 }
 
 .square {
@@ -35,38 +43,43 @@
   height: 50px;
   /* border: solid white 1px; */
   border: solid #ccffcc 1px;
+  /* background-color: #ccffcc; */
   background-color: #ccffcc;
+  opacity: 0.3;
   margin: 1px;
   border-radius: 3px;
-  /* transition: 1s; */
+  /* transition: 0.5s; */
   cursor: "";
-}
-
-.squareNoT {
-  width: 50px;
-  height: 50px;
-  /* border: solid black 1px; */
-  border: solid #ccffcc 1px;
-  background-color: #ccffcc;
-  margin: 1px;
-  border-radius: 3px;
-  /* transition: 1s; */
 }
 
 .nearBy {
   width: 50px;
   height: 50px;
   /* border: solid black 1px; */
-  border: solid #ccffcc 1px;
-  background-color: #ccffcc;
-  opacity: 0.5;
+  border: solid white 1px;
+  /* border: solid #ccffcc 1px; */
+  /* background-color: #ccffcc; */
+  background-color: white;
+  opacity: 0.4;
   margin: 1px;
   border-radius: 3px;
 }
 
-.square:hover {
-  background-color: bisque;
-}
+/* .square:hover { */
+/* width: 50px; */
+/* height: 50px; */
+/* border: solid white 1px; */
+/* border: solid #ccffcc 1px; */
+/* background-color: #ccffcc; */
+/* margin: 1px; */
+/* border-radius: 3px; */
+/* transition: 0.5s; */
+
+/* opacity: 0.3; */
+/* background-color: #ccffcc; */
+
+/* border: solid white 1px; */
+/* } */
 
 .clicked {
   width: 50px;
@@ -80,181 +93,191 @@
 .placedTank {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
-  /* transition: 1s; */
+  /* transition: 0.5s; */
   background: url(images/Artillery-Gun-Silhouette.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
+  background-color: rgb(252, 8, 8);
 }
 
 .placedScout {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
-  /* transition: 1s; */
+  background-color: rgb(252, 8, 8);
+  /* transition: 0.5s; */
   /* transform: translate(54px, 54px); */
 }
 
 .computerTank {
   width: 50px;
   height: 50px;
-  border: solid rgb(36, 72, 231) 1px;
+  border: solid rgb(8, 130, 252) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/Artillery-Gun-Silhouette.png);
   background-size: contain;
-  background-color: rgb(36, 72, 231);
-  /* transition: 1s; */
+  background-color: rgb(0, 128, 255);
+  /* transition: 0.5s; */
   cursor: "";
 }
 
 .computerScout {
   width: 50px;
   height: 50px;
-  border: solid rgb(36, 72, 231) 1px;
+  border: solid rgb(8, 130, 252) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(36, 72, 231);
-  /* transition: 1s; */
+  background-color: rgb(8, 130, 252);
+  /* transition: 0.5s; */
 }
 
 .explosionHit {
+  opacity: 1;
   background: url(images/explosion.png);
   background-size: contain;
-  background-color: rgb(36, 72, 231);
+  background-color: rgb(8, 130, 252);
+  width: 51px;
+  height: 51px;
+  border: solid white 0px;
+  /* border: solid #ccffcc 1px; */
 }
 
 .explosionMiss {
+  opacity: 1;
   background: url(images/explosion.png);
   background-size: contain;
-  background-color: #ccffcc;
-  /* transition: 1s; */
+  /* background-color: #ccffcc; */
+  width: 51px;
+  height: 51px;
+  border: solid white 0px;
+
+  /* transition: 0.5s; */
 }
 
 /* movement animations for playerscout */
 .transL {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
-  transition: 1s;
+  background-color: rgb(252, 8, 8);
+  transition: 0.5s;
   transform: translate(-54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transR {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
-  transition: 1s;
+  background-color: rgb(252, 8, 8);
+  transition: 0.5s;
   transform: translate(54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
 .transU {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
-  transition: 1s;
+  background-color: rgb(252, 8, 8);
+  transition: 0.5s;
   transform: translate(0, -54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transUR {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
-  transition: 1s;
+  background-color: rgb(252, 8, 8);
+  transition: 0.5s;
   transform: translate(54px, -54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
 .transUL {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
-  transition: 1s;
+  background-color: rgb(252, 8, 8);
+  transition: 0.5s;
   transform: translate(-54px, -54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transD {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
-  transition: 1s;
+  background-color: rgb(252, 8, 8);
+  transition: 0.5s;
   transform: translate(0, 54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
 .transDR {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
-  transition: 1s;
+  background-color: rgb(252, 8, 8);
+  transition: 0.5s;
   transform: translate(54px, 54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
 .transDL {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
-  transition: 1s;
+  background-color: rgb(252, 8, 8);
+  transition: 0.5s;
   transform: translate(-54px, 54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
@@ -262,117 +285,117 @@
 .transLTank {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/Artillery-Gun-Silhouette.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
-  transition: 1s;
+  background-color: rgb(252, 8, 8);
+  transition: 0.5s;
   transform: translate(-54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transRTank {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/Artillery-Gun-Silhouette.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
-  transition: 1s;
+  background-color: rgb(252, 8, 8);
+  transition: 0.5s;
   transform: translate(54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
 .transUTank {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/Artillery-Gun-Silhouette.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
-  transition: 1s;
+  background-color: rgb(252, 8, 8);
+  transition: 0.5s;
   transform: translate(0, -54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transURTank {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/Artillery-Gun-Silhouette.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
-  transition: 1s;
+  background-color: rgb(252, 8, 8);
+  transition: 0.5s;
   transform: translate(54px, -54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
 .transULTank {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/Artillery-Gun-Silhouette.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
-  transition: 1s;
+  background-color: rgb(252, 8, 8);
+  transition: 0.5s;
   transform: translate(-54px, -54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transDTank {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/Artillery-Gun-Silhouette.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
-  transition: 1s;
+  background-color: rgb(252, 8, 8);
+  transition: 0.5s;
   transform: translate(0, 54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
 .transDRTank {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/Artillery-Gun-Silhouette.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
-  transition: 1s;
+  background-color: rgb(252, 8, 8);
+  transition: 0.5s;
   transform: translate(54px, 54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
 .transDLTank {
   width: 50px;
   height: 50px;
-  border: solid rgb(211, 13, 129) 1px;
+  border: solid rgb(252, 8, 8) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/Artillery-Gun-Silhouette.png);
   background-size: contain;
-  background-color: rgb(211, 13, 129);
-  transition: 1s;
+  background-color: rgb(252, 8, 8);
+  transition: 0.5s;
   transform: translate(-54px, 54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
@@ -380,118 +403,137 @@
 .transLCS {
   width: 50px;
   height: 50px;
-  border: solid rgb(36, 72, 231) 1px;
+  border: solid rgb(8, 130, 252) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(36, 72, 231);
-  transition: 1s;
+  background-color: rgb(8, 130, 252);
+  transition: 0.5s;
   transform: translate(-54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transRCS {
   width: 50px;
   height: 50px;
-  border: solid rgb(36, 72, 231) 1px;
+  border: solid rgb(8, 130, 252) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(36, 72, 231);
-  transition: 1s;
+  background-color: rgb(8, 130, 252);
+  transition: 0.5s;
   transform: translate(54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
 .transUCS {
   width: 50px;
   height: 50px;
-  border: solid rgb(36, 72, 231) 1px;
+  border: solid rgb(8, 130, 252) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(36, 72, 231);
-  transition: 1s;
+  background-color: rgb(8, 130, 252);
+  transition: 0.5s;
   transform: translate(0, -54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transURCS {
   width: 50px;
   height: 50px;
-  border: solid rgb(36, 72, 231) 1px;
+  border: solid rgb(8, 130, 252) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(36, 72, 231);
-  transition: 1s;
+  background-color: rgb(8, 130, 252);
+  transition: 0.5s;
   transform: translate(54px, -54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
 .transULCS {
   width: 50px;
   height: 50px;
-  border: solid rgb(36, 72, 231) 1px;
+  border: solid rgb(8, 130, 252) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(36, 72, 231);
-  transition: 1s;
+  background-color: rgb(8, 130, 252);
+  transition: 0.5s;
   transform: translate(-54px, -54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transDCS {
   width: 50px;
   height: 50px;
-  border: solid rgb(36, 72, 231) 1px;
+  border: solid rgb(8, 130, 252) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(36, 72, 231);
-  transition: 1s;
+  background-color: rgb(8, 130, 252);
+  transition: 0.5s;
   transform: translate(0, 54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
 .transDRCS {
   width: 50px;
   height: 50px;
-  border: solid rgb(36, 72, 231) 1px;
+  border: solid rgb(8, 130, 252) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(36, 72, 231);
-  transition: 1s;
+  background-color: rgb(8, 130, 252);
+  transition: 0.5s;
   transform: translate(54px, 54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
 .transDLCS {
   width: 50px;
   height: 50px;
-  border: solid rgb(36, 72, 231) 1px;
+  border: solid rgb(8, 130, 252) 1px;
   margin: 1px;
   border-radius: 3px;
   background: url(images/scout.png);
   background-size: contain;
-  background-color: rgb(36, 72, 231);
-  transition: 1s;
+  background-color: rgb(8, 130, 252);
+  transition: 0.5s;
   transform: translate(-54px, 54px);
-  /* animation: left-to-right 1s forwards; */
+  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
+}
+
+#restartDiv {
+  position: fixed;
+  /* position: absolute; */
+  top: 40vh;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  font-size: 18px;
+  display: none;
+}
+
+#restartButton {
+  padding: 25px;
+  background-image: url(/images/camo.jpg);
+  color: white;
+  font-size: 30px;
+  text-transform: uppercase;
 }
 
 /* @keyframes left-to-right {
@@ -500,18 +542,18 @@
   }
 } */
 
-#announce {
-  color: rgb(36, 72, 231);
+/* #announce {
+  color: rgb(8, 130, 252);
 }
 
 #announceTwo {
-  color: rgb(36, 72, 231);
+  color: rgb(8, 130, 252);
 }
 
 #announceThree {
-  color: rgb(211, 13, 129);
+  color: rgb(252, 8, 8);
 }
 
 #announceFour {
-  color: rgb(211, 13, 129);
-}
+  color: rgb(252, 8, 8);
+} */

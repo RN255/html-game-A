@@ -30,3 +30,11 @@ creating a html game
     - computer cannot read minus class numbers are runs an error, needs fixing
 
     -- remember that stupid tank keeps appearing even after reset!
+
+- there is no explosion on the final hit
+- the background isnt blue when you hit him in the dark. needs more feedback.
+- could increase artillery hp
+- the AI needs some thinking!
+- we need a restart option that appears when you win.
+- he shoots himself on occassion.
+- he hit my artillery and then it disappeared...
