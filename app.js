@@ -194,6 +194,40 @@ function compPlaceScout() {
   // }
 }
 
+function crosshairCursorOn() {
+  var e = document.getElementsByClassName("square");
+  for (var x = 0; x < e.length; x++) {
+    e[x].style.cursor = 'url("images/crosshair50.png")25 25, move';
+  }
+
+  var e = document.getElementsByClassName("computerTank");
+  for (var x = 0; x < e.length; x++) {
+    e[x].style.cursor = 'url("images/crosshair50.png")25 25, move';
+  }
+
+  var e = document.getElementsByClassName("computerScout");
+  for (var x = 0; x < e.length; x++) {
+    e[x].style.cursor = 'url("images/crosshair50.png")25 25, move';
+  }
+}
+
+function crosshairCursorOff() {
+  var e = document.getElementsByClassName("square");
+  for (var x = 0; x < e.length; x++) {
+    e[x].style.cursor = "";
+  }
+
+  var e = document.getElementsByClassName("computerTank");
+  for (var x = 0; x < e.length; x++) {
+    e[x].style.cursor = "";
+  }
+
+  var e = document.getElementsByClassName("computerScout");
+  for (var x = 0; x < e.length; x++) {
+    e[x].style.cursor = "";
+  }
+}
+
 // move and fire units
 // player change location of scout
 function scoutMove(i) {
@@ -207,6 +241,7 @@ function scoutMove(i) {
     notes.innerHTML = "info: Fire artillery!";
     clearNearBy();
     revealArtillery();
+    crosshairCursorOn();
   }
 
   if (canUnitMove(i, scoutLocation) == -1 && squares[i].className == "nearBy") {
@@ -253,6 +288,69 @@ function scoutMove(i) {
     squares[i].className == "nearBy"
   ) {
     squares[scoutLocation].className = "transDL";
+    setTimeout(completeTurn, 1000);
+  }
+}
+
+// player change location of artillery
+function tankMove(i) {
+  function completeTurn() {
+    squares[tankLocation].className = "square";
+    squares[tankLocation].innerHTML = "";
+    squares[i].className = "placedTank";
+    // squares[i].innerHTML = "player scout";
+    tankLocation = i;
+    tankMoved++;
+    // notes.innerHTML = "info: Fire artillery!";
+    clearNearBy();
+    tankRevealArtillery();
+    setTimeout(CompueterScoutMove, 500);
+  }
+
+  if (canUnitMove(i, tankLocation) == -1 && squares[i].className == "nearBy") {
+    squares[tankLocation].className = "transLTank";
+    setTimeout(completeTurn, 1000);
+  } else if (
+    canUnitMove(i, tankLocation) == +1 &&
+    squares[i].className == "nearBy"
+  ) {
+    squares[tankLocation].className = "transRTank";
+    setTimeout(completeTurn, 1000);
+  } else if (
+    canUnitMove(i, tankLocation) == -10 &&
+    squares[i].className == "nearBy"
+  ) {
+    squares[tankLocation].className = "transUTank";
+    setTimeout(completeTurn, 1000);
+  } else if (
+    canUnitMove(i, tankLocation) == -9 &&
+    squares[i].className == "nearBy"
+  ) {
+    squares[tankLocation].className = "transURTank";
+    setTimeout(completeTurn, 1000);
+  } else if (
+    canUnitMove(i, tankLocation) == -11 &&
+    squares[i].className == "nearBy"
+  ) {
+    squares[tankLocation].className = "transULTank";
+    setTimeout(completeTurn, 1000);
+  } else if (
+    canUnitMove(i, tankLocation) == +10 &&
+    squares[i].className == "nearBy"
+  ) {
+    squares[tankLocation].className = "transDTank";
+    setTimeout(completeTurn, 1000);
+  } else if (
+    canUnitMove(i, tankLocation) == +11 &&
+    squares[i].className == "nearBy"
+  ) {
+    squares[tankLocation].className = "transDRTank";
+    setTimeout(completeTurn, 1000);
+  } else if (
+    canUnitMove(i, tankLocation) == +9 &&
+    squares[i].className == "nearBy"
+  ) {
+    squares[tankLocation].className = "transDLTank";
     setTimeout(completeTurn, 1000);
   }
 }
@@ -317,6 +415,7 @@ function tankShoot(i) {
     // updateInfo();
     tankAlive(i);
     gameOver();
+    crosshairCursorOff();
     tankHasShot++;
     notes.innerHTML = "info: ";
     setTimeout(WhereCanIMove, 500);
@@ -328,6 +427,7 @@ function tankShoot(i) {
     // updateInfo();
     // scoutAlive(i);
     gameOver();
+    crosshairCursorOff();
     tankHasShot++;
     notes.innerHTML = "info: ";
     setTimeout(WhereCanIMove, 500);
@@ -337,6 +437,7 @@ function tankShoot(i) {
     // squares[i].className = "clicked";
     tankHasShot++;
     squareHit(i);
+    crosshairCursorOff();
     notes.innerHTML = "info: ";
     setTimeout(WhereCanIMove, 500);
   }
@@ -379,26 +480,26 @@ function computerTankShoot() {
   }
 }
 
-// change location of tank
-function tankMove(i) {
-  if (canUnitMove(i, tankLocation) && squares[i].className == "nearBy") {
-    squares[tankLocation].className = "square";
-    squares[tankLocation].innerHTML = "";
-    squares[i].className = "placedTank";
-    // squares[i].innerHTML = "player tank";
-    tankLocation = i;
-    tankMoved++;
-    clearNearBy();
-    tankRevealArtillery();
+// // change location of tank
+// function tankMove(i) {
+//   if (canUnitMove(i, tankLocation) && squares[i].className == "nearBy") {
+//     squares[tankLocation].className = "square";
+//     squares[tankLocation].innerHTML = "";
+//     squares[i].className = "placedTank";
+//     // squares[i].innerHTML = "player tank";
+//     tankLocation = i;
+//     tankMoved++;
+//     clearNearBy();
+//     tankRevealArtillery();
 
-    // WhereCanIMove();
-    // computer moves scout then turn is reset
-    // is this the best place to put this?
-    setTimeout(CompueterScoutMove, 500);
-    // setTimeout(CompueterScoutMove, 100);
-    // resetMove();
-  }
-}
+//     // WhereCanIMove();
+//     // computer moves scout then turn is reset
+//     // is this the best place to put this?
+//     setTimeout(CompueterScoutMove, 500);
+//     // setTimeout(CompueterScoutMove, 100);
+//     // resetMove();
+//   }
+// }
 
 //where can i move, and then shoot, and even see...
 
@@ -627,9 +728,16 @@ function WhereCanIMove() {
   // }
 }
 
-//computer scout move
+// computer scout move
 function CompueterScoutMove() {
   if (computerScoutAlive == true) {
+    function completeTurn() {
+      squares[computerScoutLocation].className = "square";
+      squares[moveChoice].className = "computerScout";
+      setTimeout(computerTankShoot, 500);
+      computerScoutLocation = moveChoice;
+    }
+
     let moveChoiceNumber = 0;
     // set movement options depending on unit location and get choice
     if ((computerScoutLocation + 1) % 10 == 0) {
@@ -647,18 +755,65 @@ function CompueterScoutMove() {
     }
     //detemine movement choice
     let moveChoice = computerScoutLocation + moveChoiceNumber;
+
     // check move is possible
     if (moveChoice >= 0 && moveChoice <= 99) {
       if (
         squares[moveChoice].className == "square" &&
-        moveChoice != computerTankLocation
+        moveChoice != computerTankLocation &&
+        moveChoiceNumber == -1
       ) {
-        squares[computerScoutLocation].className = "square";
-        squares[computerScoutLocation].innerHTML = "";
-        squares[moveChoice].className = "computerScout";
-        // squares[moveChoice].innerHTML = "computer scout";
-        computerScoutLocation = moveChoice;
-        setTimeout(computerTankShoot, 500);
+        squares[computerScoutLocation].className = "transLCS";
+        setTimeout(completeTurn, 1000);
+      } else if (
+        squares[moveChoice].className == "square" &&
+        moveChoice != computerTankLocation &&
+        moveChoiceNumber == +1
+      ) {
+        squares[computerScoutLocation].className = "transRCS";
+        setTimeout(completeTurn, 1000);
+      } else if (
+        squares[moveChoice].className == "square" &&
+        moveChoice != computerTankLocation &&
+        moveChoiceNumber == -10
+      ) {
+        squares[computerScoutLocation].className = "transUCS";
+        setTimeout(completeTurn, 1000);
+      } else if (
+        squares[moveChoice].className == "square" &&
+        moveChoice != computerTankLocation &&
+        moveChoiceNumber == -9
+      ) {
+        squares[computerScoutLocation].className = "transURCS";
+        setTimeout(completeTurn, 1000);
+      } else if (
+        squares[moveChoice].className == "square" &&
+        moveChoice != computerTankLocation &&
+        moveChoiceNumber == -11
+      ) {
+        squares[computerScoutLocation].className = "transULCS";
+        setTimeout(completeTurn, 1000);
+      } else if (
+        squares[moveChoice].className == "square" &&
+        moveChoice != computerTankLocation &&
+        moveChoiceNumber == +10
+      ) {
+        squares[computerScoutLocation].className = "transDCS";
+        setTimeout(completeTurn, 1000);
+      } else if (
+        squares[moveChoice].className == "square" &&
+        moveChoice != computerTankLocation &&
+        moveChoiceNumber == +11
+      ) {
+        squares[computerScoutLocation].className = "transDRCS";
+        setTimeout(completeTurn, 1000);
+      } else if (
+        squares[moveChoice].className == "square" &&
+        moveChoice != computerTankLocation &&
+        moveChoiceNumber == +9
+      ) {
+        squares[computerScoutLocation].className = "transDLCS";
+        setTimeout(completeTurn, 1000);
       } else {
         CompueterScoutMove();
       }
@@ -669,6 +824,49 @@ function CompueterScoutMove() {
     computerTankShoot();
   }
 }
+
+// //computer scout move
+// function CompueterScoutMove() {
+//   if (computerScoutAlive == true) {
+//     let moveChoiceNumber = 0;
+//     // set movement options depending on unit location and get choice
+//     if ((computerScoutLocation + 1) % 10 == 0) {
+//       const optionOne = [-1, 10, -10, 9, -11];
+//       var index = Math.floor(Math.random() * optionOne.length);
+//       moveChoiceNumber = optionOne[index];
+//     } else if (computerScoutLocation % 10 == 0) {
+//       const optionTwo = [1, 10, -10, 11, -9];
+//       var index = Math.floor(Math.random() * optionTwo.length);
+//       moveChoiceNumber = optionTwo[index];
+//     } else {
+//       const optionThree = [1, -1, 10, -10, 11, 9, -11, -9];
+//       var index = Math.floor(Math.random() * optionThree.length);
+//       moveChoiceNumber = optionThree[index];
+//     }
+//     //detemine movement choice
+//     let moveChoice = computerScoutLocation + moveChoiceNumber;
+//     // check move is possible
+//     if (moveChoice >= 0 && moveChoice <= 99) {
+//       if (
+//         squares[moveChoice].className == "square" &&
+//         moveChoice != computerTankLocation
+//       ) {
+//         squares[computerScoutLocation].className = "square";
+//         squares[computerScoutLocation].innerHTML = "";
+//         squares[moveChoice].className = "computerScout";
+//         // squares[moveChoice].innerHTML = "computer scout";
+//         computerScoutLocation = moveChoice;
+//         setTimeout(computerTankShoot, 500);
+//       } else {
+//         CompueterScoutMove();
+//       }
+//     } else {
+//       CompueterScoutMove();
+//     }
+//   } else {
+//     computerTankShoot();
+//   }
+// }
 
 //computer tank move
 function CompueterTankMove() {
@@ -820,6 +1018,14 @@ for (let i = 0; i < squares.length; i++) {
       } else if (scoutMoved < 1) {
         scoutMove(i);
       } else if (tankHasShot < 1) {
+        // document.getElementsByClassName('square').style.cursor = "url(\"images/crosshair50.png\")25 25, move";
+        // var e = document.getElementsByClassName("square");
+        // for (var x = 0; x < e.length; x++) {
+        //   e[x].style.cursor = "url(\"images/crosshair50.png\")25 25, move";
+        // }
+
+        // document.getElementsByClassName("square").style.margin = "3px";
+
         tankShoot(i);
       } else if (tankMoved < 1) {
         tankMove(i);
