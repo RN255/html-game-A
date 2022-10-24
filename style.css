@@ -1,3 +1,5 @@
+/* cursor: url("images/crosshair50.png")25 25, move; */
+
 .grid {
   display: flex;
   flex-wrap: wrap;
@@ -15,6 +17,7 @@
   margin: 1px;
   border-radius: 3px;
   /* transition: 1s; */
+  cursor: "";
 }
 
 .squareNoT {
@@ -87,6 +90,7 @@
   background-size: contain;
   background-color: rgb(36, 72, 231);
   /* transition: 1s; */
+  cursor: "";
 }
 
 .computerScout {
@@ -111,9 +115,10 @@
   background: url(images/explosion.png);
   background-size: contain;
   background-color: #ccffcc;
+  /* transition: 1s; */
 }
 
-/* movement animations */
+/* movement animations for playerscout */
 .transL {
   width: 50px;
   height: 50px;
@@ -225,6 +230,242 @@
   background: url(images/scout.png);
   background-size: contain;
   background-color: rgb(211, 13, 129);
+  transition: 1s;
+  transform: translate(-54px, 54px);
+  /* animation: left-to-right 1s forwards; */
+  z-index: 1;
+}
+
+/* movement animations for player tank */
+.transLTank {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(211, 13, 129) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/Artillery-Gun-Silhouette.png);
+  background-size: contain;
+  background-color: rgb(211, 13, 129);
+  transition: 1s;
+  transform: translate(-54px);
+  /* animation: left-to-right 1s forwards; */
+}
+
+.transRTank {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(211, 13, 129) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/Artillery-Gun-Silhouette.png);
+  background-size: contain;
+  background-color: rgb(211, 13, 129);
+  transition: 1s;
+  transform: translate(54px);
+  /* animation: left-to-right 1s forwards; */
+  z-index: 1;
+}
+
+.transUTank {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(211, 13, 129) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/Artillery-Gun-Silhouette.png);
+  background-size: contain;
+  background-color: rgb(211, 13, 129);
+  transition: 1s;
+  transform: translate(0, -54px);
+  /* animation: left-to-right 1s forwards; */
+}
+
+.transURTank {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(211, 13, 129) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/Artillery-Gun-Silhouette.png);
+  background-size: contain;
+  background-color: rgb(211, 13, 129);
+  transition: 1s;
+  transform: translate(54px, -54px);
+  /* animation: left-to-right 1s forwards; */
+  z-index: 1;
+}
+
+.transULTank {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(211, 13, 129) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/Artillery-Gun-Silhouette.png);
+  background-size: contain;
+  background-color: rgb(211, 13, 129);
+  transition: 1s;
+  transform: translate(-54px, -54px);
+  /* animation: left-to-right 1s forwards; */
+}
+
+.transDTank {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(211, 13, 129) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/Artillery-Gun-Silhouette.png);
+  background-size: contain;
+  background-color: rgb(211, 13, 129);
+  transition: 1s;
+  transform: translate(0, 54px);
+  /* animation: left-to-right 1s forwards; */
+  z-index: 1;
+}
+
+.transDRTank {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(211, 13, 129) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/Artillery-Gun-Silhouette.png);
+  background-size: contain;
+  background-color: rgb(211, 13, 129);
+  transition: 1s;
+  transform: translate(54px, 54px);
+  /* animation: left-to-right 1s forwards; */
+  z-index: 1;
+}
+
+.transDLTank {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(211, 13, 129) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/Artillery-Gun-Silhouette.png);
+  background-size: contain;
+  background-color: rgb(211, 13, 129);
+  transition: 1s;
+  transform: translate(-54px, 54px);
+  /* animation: left-to-right 1s forwards; */
+  z-index: 1;
+}
+
+/* movement animations for computer scout */
+.transLCS {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(36, 72, 231) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/scout.png);
+  background-size: contain;
+  background-color: rgb(36, 72, 231);
+  transition: 1s;
+  transform: translate(-54px);
+  /* animation: left-to-right 1s forwards; */
+}
+
+.transRCS {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(36, 72, 231) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/scout.png);
+  background-size: contain;
+  background-color: rgb(36, 72, 231);
+  transition: 1s;
+  transform: translate(54px);
+  /* animation: left-to-right 1s forwards; */
+  z-index: 1;
+}
+
+.transUCS {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(36, 72, 231) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/scout.png);
+  background-size: contain;
+  background-color: rgb(36, 72, 231);
+  transition: 1s;
+  transform: translate(0, -54px);
+  /* animation: left-to-right 1s forwards; */
+}
+
+.transURCS {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(36, 72, 231) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/scout.png);
+  background-size: contain;
+  background-color: rgb(36, 72, 231);
+  transition: 1s;
+  transform: translate(54px, -54px);
+  /* animation: left-to-right 1s forwards; */
+  z-index: 1;
+}
+
+.transULCS {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(36, 72, 231) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/scout.png);
+  background-size: contain;
+  background-color: rgb(36, 72, 231);
+  transition: 1s;
+  transform: translate(-54px, -54px);
+  /* animation: left-to-right 1s forwards; */
+}
+
+.transDCS {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(36, 72, 231) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/scout.png);
+  background-size: contain;
+  background-color: rgb(36, 72, 231);
+  transition: 1s;
+  transform: translate(0, 54px);
+  /* animation: left-to-right 1s forwards; */
+  z-index: 1;
+}
+
+.transDRCS {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(36, 72, 231) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/scout.png);
+  background-size: contain;
+  background-color: rgb(36, 72, 231);
+  transition: 1s;
+  transform: translate(54px, 54px);
+  /* animation: left-to-right 1s forwards; */
+  z-index: 1;
+}
+
+.transDLCS {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(36, 72, 231) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/scout.png);
+  background-size: contain;
+  background-color: rgb(36, 72, 231);
   transition: 1s;
   transform: translate(-54px, 54px);
   /* animation: left-to-right 1s forwards; */
