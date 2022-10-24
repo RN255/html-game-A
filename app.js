@@ -1,12 +1,12 @@
 //collect some html
 const squares = document.querySelectorAll(".square");
-const Hpannounce = document.getElementById("announce");
-const notes = document.getElementById("notes");
-const scoutHpannounce = document.getElementById("announceTwo");
+// const Hpannounce = document.getElementById("announce");
+// const notes = document.getElementById("notes");
+// const scoutHpannounce = document.getElementById("announceTwo");
 const restart = document.getElementById("restartButton");
 
-const announceThree = document.getElementById("announceThree");
-const announceFour = document.getElementById("announceFour");
+// const announceThree = document.getElementById("announceThree");
+// const announceFour = document.getElementById("announceFour");
 
 // start of game
 let gameRunning = true;
@@ -43,11 +43,11 @@ let computerTankHasShot = 0;
 
 //update infor function
 function updateInfo() {
-  Hpannounce.innerHTML = "Enemy Tank HP: " + computerTankHp;
-  scoutHpannounce.innerHTML = "Enemy Scout HP: " + computerScoutHp;
-  announceThree.innerHTML = "Player Tank HP: " + playerTankHp;
-  announceFour.innerHTML = "Player Tank HP: " + playerScoutHp;
-  notes.innerHTML = "info: ";
+  // Hpannounce.innerHTML = "Enemy Tank HP: " + computerTankHp;
+  // scoutHpannounce.innerHTML = "Enemy Scout HP: " + computerScoutHp;
+  // announceThree.innerHTML = "Player Tank HP: " + playerTankHp;
+  // announceFour.innerHTML = "Player Tank HP: " + playerScoutHp;
+  // notes.innerHTML = "info: ";
 }
 
 //restart game function
@@ -58,7 +58,7 @@ function restartFunc() {
   //reset squares
   for (let i = 0; i < squares.length; i++) {
     squares[i].className = "square";
-    squares[i].innerHTML = "";
+    // squares[i].innerHTML = "";
     //reset player scout info
     scoutPlaced = false;
     scoutLocation = 0;
@@ -115,6 +115,8 @@ function compPlaceTank() {
     squares[placementAttempt].className == "square"
   ) {
     computerTankLocation = placementAttempt;
+    document.getElementById("headingsText").innerHTML =
+      "select scout starting location";
   } else {
     compPlaceTank();
   }
@@ -143,7 +145,7 @@ function playerPlaceScout(i) {
 
 //computer places scout
 function compPlaceScout() {
-  notes.innerHTML = "we got here";
+  // notes.innerHTML = "we got here";
 
   if (tankLocation <= 50) {
     const optionsList = [+31, +37, +42, +45, +47];
@@ -163,7 +165,7 @@ function compPlaceScout() {
   // var index = Math.floor(Math.random() * optionsList.length);
   // scoutPlacementChoiceNumber = optionsList[index];
   // let placementAttempt = tankLocation + scoutPlacementChoiceNumber;
-  notes.innerHTML = tankPlacementChoiceNumber + " " + placementAttempt;
+  // notes.innerHTML = tankPlacementChoiceNumber + " " + placementAttempt;
 
   if (0 <= placementAttempt <= 99) {
     if (squares[placementAttempt].className == "square") {
@@ -173,8 +175,9 @@ function compPlaceScout() {
       WhereCanIMoveScout();
       revealArtillery();
       tankRevealArtillery();
+      document.getElementById("headingsText").innerHTML = "move scout";
     } else {
-      notes.innerHTML = "we didnt even get here";
+      // notes.innerHTML = "we didnt even get here";
       compPlaceScout();
     }
   } else {
@@ -233,15 +236,16 @@ function crosshairCursorOff() {
 function scoutMove(i) {
   function completeTurn() {
     squares[scoutLocation].className = "square";
-    squares[scoutLocation].innerHTML = "";
+    // squares[scoutLocation].innerHTML = "";
     squares[i].className = "placedScout";
     // squares[i].innerHTML = "player scout";
     scoutLocation = i;
     scoutMoved++;
-    notes.innerHTML = "info: Fire artillery!";
+    // notes.innerHTML = "info: Fire artillery!";
     clearNearBy();
     revealArtillery();
     crosshairCursorOn();
+    document.getElementById("headingsText").innerHTML = "fire artillery";
   }
 
   if (canUnitMove(i, scoutLocation) == -1 && squares[i].className == "nearBy") {
@@ -296,7 +300,7 @@ function scoutMove(i) {
 function tankMove(i) {
   function completeTurn() {
     squares[tankLocation].className = "square";
-    squares[tankLocation].innerHTML = "";
+    // squares[tankLocation].innerHTML = "";
     squares[i].className = "placedTank";
     // squares[i].innerHTML = "player scout";
     tankLocation = i;
@@ -304,6 +308,7 @@ function tankMove(i) {
     // notes.innerHTML = "info: Fire artillery!";
     clearNearBy();
     tankRevealArtillery();
+    document.getElementById("headingsText").innerHTML = "computer turn";
     setTimeout(CompueterScoutMove, 500);
   }
 
@@ -414,11 +419,16 @@ function tankShoot(i) {
     squareHit(i);
     // updateInfo();
     tankAlive(i);
-    gameOver();
     crosshairCursorOff();
     tankHasShot++;
-    notes.innerHTML = "info: ";
-    setTimeout(WhereCanIMove, 500);
+    // notes.innerHTML = "info: ";
+    if (gameOver()) {
+      document.getElementById("headingsText").innerHTML =
+        "artillery destroyed - You win!";
+    } else {
+      document.getElementById("headingsText").innerHTML = "move artillery";
+      setTimeout(WhereCanIMove, 500);
+    }
   } else if (squares[i].className == "computerScout") {
     gameRunning = false;
     computerScoutHp -= 50;
@@ -428,8 +438,9 @@ function tankShoot(i) {
     // scoutAlive(i);
     gameOver();
     crosshairCursorOff();
+    document.getElementById("headingsText").innerHTML = "move artillery";
     tankHasShot++;
-    notes.innerHTML = "info: ";
+    // notes.innerHTML = "info: ";
     setTimeout(WhereCanIMove, 500);
   } else {
     gameRunning = false;
@@ -438,7 +449,8 @@ function tankShoot(i) {
     tankHasShot++;
     squareHit(i);
     crosshairCursorOff();
-    notes.innerHTML = "info: ";
+    document.getElementById("headingsText").innerHTML = "move artillery";
+    // notes.innerHTML = "info: ";
     setTimeout(WhereCanIMove, 500);
   }
 }
@@ -895,9 +907,9 @@ function CompueterTankMove() {
       squares[moveChoice].className == "square" &&
       moveChoice != computerScoutLocation
     ) {
-      Hpannounce.innerHTML =
-        moveChoice + " " + tankLocation + " " + scoutLocation;
-      scoutHpannounce.innerHTML = "i ran";
+      // Hpannounce.innerHTML =
+      // moveChoice + " " + tankLocation + " " + scoutLocation;
+      // scoutHpannounce.innerHTML = "i ran";
       // announceThree.innerHTML = "Player Tank HP: " + playerTankHp;
       // announceFour.innerHTML = "Player Tank HP: " + playerScoutHp;
       // notes.innerHTML = "info: ";
@@ -910,12 +922,13 @@ function CompueterTankMove() {
       // squares[moveChoice].className = "computerTank";
       // squares[moveChoice].innerHTML = "computer tank";
       computerTankLocation = moveChoice;
-      announceThree.innerHTML = computerTankLocation;
+      // announceThree.innerHTML = computerTankLocation;
 
       WhereCanIMoveScout();
       revealArtillery();
       tankRevealArtillery();
       resetMove();
+      document.getElementById("headingsText").innerHTML = "move scout";
     } else {
       CompueterTankMove();
     }
@@ -956,9 +969,9 @@ function canUnitMove(i, unitLocation) {
 //check enemy tank is alive
 function tankAlive(i) {
   if (computerTankHp <= 0) {
-    Hpannounce.innerHTML = "Tank HP: Tank is dead!";
+    // Hpannounce.innerHTML = "Tank HP: Tank is dead!";
     squares[i].className = "square";
-    squares[i].innerHTML = "";
+    // squares[i].innerHTML = "";
     computerTankAlive = false;
   }
 }
@@ -966,9 +979,9 @@ function tankAlive(i) {
 //check enemy scout is alive
 function scoutAlive(i) {
   if (computerScoutHp <= 0) {
-    scoutHpannounce.innerHTML = "Scout HP: Scout is dead!";
+    // scoutHpannounce.innerHTML = "Scout HP: Scout is dead!";
     squares[i].className = "square";
-    squares[i].innerHTML = "";
+    // squares[i].innerHTML = "";
     computerScoutAlive = false;
   }
 }
@@ -976,9 +989,9 @@ function scoutAlive(i) {
 //check player tank is alive
 function CheckPlayerTankAlive(i) {
   if (playerTankHp <= 0) {
-    announceThree.innerHTML = "Player Tank HP: Tank is dead!";
+    // announceThree.innerHTML = "Player Tank HP: Tank is dead!";
     squares[i].className = "square";
-    squares[i].innerHTML = "";
+    // squares[i].innerHTML = "";
     playerTankAlive = false;
   }
 }
@@ -986,9 +999,9 @@ function CheckPlayerTankAlive(i) {
 //check player scout is alive
 function CheckPlayerScoutAlive(i) {
   if (playerScoutHp <= 0) {
-    announceFour.innerHTML = "Player Scout HP: Scout is dead!";
+    // announceFour.innerHTML = "Player Scout HP: Scout is dead!";
     squares[i].className = "square";
-    squares[i].innerHTML = "";
+    // squares[i].innerHTML = "";
     playerScoutAlive = false;
   }
 }
@@ -996,14 +1009,19 @@ function CheckPlayerScoutAlive(i) {
 //check for game over
 function gameOver() {
   if (computerTankHp <= 0) {
-    scoutHpannounce.innerHTML = "Scout HP: Scout is dead! - GAME OVER DUDE!";
+    // scoutHpannounce.innerHTML = "Scout HP: Scout is dead! - GAME OVER DUDE!";
     clearNearBy();
     gameRunning = false;
+    return true;
   }
 }
 
 //display info before game begins
 // updateInfo();
+
+//starting announcement
+document.getElementById("headingsText").innerHTML =
+  "select artillery starting location";
 
 // game loop
 for (let i = 0; i < squares.length; i++) {
