@@ -197,7 +197,7 @@ function compPlaceScout() {
 // move and fire units
 // player change location of scout
 function scoutMove(i) {
-  if (canUnitMove(i, scoutLocation) && squares[i].className == "nearBy") {
+  function completeTurn() {
     squares[scoutLocation].className = "square";
     squares[scoutLocation].innerHTML = "";
     squares[i].className = "placedScout";
@@ -207,6 +207,53 @@ function scoutMove(i) {
     notes.innerHTML = "info: Fire artillery!";
     clearNearBy();
     revealArtillery();
+  }
+
+  if (canUnitMove(i, scoutLocation) == -1 && squares[i].className == "nearBy") {
+    squares[scoutLocation].className = "transL";
+    setTimeout(completeTurn, 1000);
+  } else if (
+    canUnitMove(i, scoutLocation) == +1 &&
+    squares[i].className == "nearBy"
+  ) {
+    squares[scoutLocation].className = "transR";
+    setTimeout(completeTurn, 1000);
+  } else if (
+    canUnitMove(i, scoutLocation) == -10 &&
+    squares[i].className == "nearBy"
+  ) {
+    squares[scoutLocation].className = "transU";
+    setTimeout(completeTurn, 1000);
+  } else if (
+    canUnitMove(i, scoutLocation) == -9 &&
+    squares[i].className == "nearBy"
+  ) {
+    squares[scoutLocation].className = "transUR";
+    setTimeout(completeTurn, 1000);
+  } else if (
+    canUnitMove(i, scoutLocation) == -11 &&
+    squares[i].className == "nearBy"
+  ) {
+    squares[scoutLocation].className = "transUL";
+    setTimeout(completeTurn, 1000);
+  } else if (
+    canUnitMove(i, scoutLocation) == +10 &&
+    squares[i].className == "nearBy"
+  ) {
+    squares[scoutLocation].className = "transD";
+    setTimeout(completeTurn, 1000);
+  } else if (
+    canUnitMove(i, scoutLocation) == +11 &&
+    squares[i].className == "nearBy"
+  ) {
+    squares[scoutLocation].className = "transDR";
+    setTimeout(completeTurn, 1000);
+  } else if (
+    canUnitMove(i, scoutLocation) == +9 &&
+    squares[i].className == "nearBy"
+  ) {
+    squares[scoutLocation].className = "transDL";
+    setTimeout(completeTurn, 1000);
   }
 }
 
@@ -688,23 +735,23 @@ function resetMove() {
 
 //test to see if unit can move
 function canUnitMove(i, unitLocation) {
-  switch (unitLocation - i) {
+  switch (i - unitLocation) {
     case 1:
-      return true;
+      return 1;
     case -1:
-      return true;
+      return -1;
     case 10:
-      return true;
+      return 10;
     case -10:
-      return true;
+      return -10;
     case 11:
-      return true;
+      return 11;
     case 9:
-      return true;
+      return 9;
     case -11:
-      return true;
+      return -11;
     case -9:
-      return true;
+      return -9;
   }
 }
 

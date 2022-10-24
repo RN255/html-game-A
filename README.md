@@ -28,3 +28,5 @@ creating a html game
     - problems - the computer tank is moving on top of me
 
     - computer cannot read minus class numbers are runs an error, needs fixing
+
+    -- remember that stupid tank keeps appearing even after reset!

@@ -3,9 +3,21 @@
   flex-wrap: wrap;
   width: 540px;
   margin: auto;
+  /* background-color: #ccffcc; */
 }
 
 .square {
+  width: 50px;
+  height: 50px;
+  /* border: solid white 1px; */
+  border: solid #ccffcc 1px;
+  background-color: #ccffcc;
+  margin: 1px;
+  border-radius: 3px;
+  /* transition: 1s; */
+}
+
+.squareNoT {
   width: 50px;
   height: 50px;
   /* border: solid black 1px; */
@@ -13,6 +25,7 @@
   background-color: #ccffcc;
   margin: 1px;
   border-radius: 3px;
+  /* transition: 1s; */
 }
 
 .nearBy {
@@ -99,6 +112,130 @@
   background-size: contain;
   background-color: #ccffcc;
 }
+
+/* movement animations */
+.transL {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(211, 13, 129) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/scout.png);
+  background-size: contain;
+  background-color: rgb(211, 13, 129);
+  transition: 1s;
+  transform: translate(-54px);
+  /* animation: left-to-right 1s forwards; */
+}
+
+.transR {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(211, 13, 129) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/scout.png);
+  background-size: contain;
+  background-color: rgb(211, 13, 129);
+  transition: 1s;
+  transform: translate(54px);
+  /* animation: left-to-right 1s forwards; */
+  z-index: 1;
+}
+
+.transU {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(211, 13, 129) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/scout.png);
+  background-size: contain;
+  background-color: rgb(211, 13, 129);
+  transition: 1s;
+  transform: translate(0, -54px);
+  /* animation: left-to-right 1s forwards; */
+}
+
+.transUR {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(211, 13, 129) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/scout.png);
+  background-size: contain;
+  background-color: rgb(211, 13, 129);
+  transition: 1s;
+  transform: translate(54px, -54px);
+  /* animation: left-to-right 1s forwards; */
+  z-index: 1;
+}
+
+.transUL {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(211, 13, 129) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/scout.png);
+  background-size: contain;
+  background-color: rgb(211, 13, 129);
+  transition: 1s;
+  transform: translate(-54px, -54px);
+  /* animation: left-to-right 1s forwards; */
+}
+
+.transD {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(211, 13, 129) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/scout.png);
+  background-size: contain;
+  background-color: rgb(211, 13, 129);
+  transition: 1s;
+  transform: translate(0, 54px);
+  /* animation: left-to-right 1s forwards; */
+  z-index: 1;
+}
+
+.transDR {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(211, 13, 129) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/scout.png);
+  background-size: contain;
+  background-color: rgb(211, 13, 129);
+  transition: 1s;
+  transform: translate(54px, 54px);
+  /* animation: left-to-right 1s forwards; */
+  z-index: 1;
+}
+
+.transDL {
+  width: 50px;
+  height: 50px;
+  border: solid rgb(211, 13, 129) 1px;
+  margin: 1px;
+  border-radius: 3px;
+  background: url(images/scout.png);
+  background-size: contain;
+  background-color: rgb(211, 13, 129);
+  transition: 1s;
+  transform: translate(-54px, 54px);
+  /* animation: left-to-right 1s forwards; */
+  z-index: 1;
+}
+
+/* @keyframes left-to-right {
+  100% {
+    transform: translateX(-100%);
+  }
+} */
 
 #announce {
   color: rgb(36, 72, 231);
