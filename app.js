@@ -4,12 +4,17 @@ const Hpannounce = document.getElementById("announce");
 // const notes = document.getElementById("notes");
 // const scoutHpannounce = document.getElementById("announceTwo");
 const restart = document.getElementById("restartButton");
+const start = document.getElementById("playButton");
+const howTo = document.getElementById("howTo");
+const howToPlayInstructions = document.getElementById("howToPlayInstructions");
+const exitInstructions = document.getElementById("exitInstructions");
+const menuGameButton = document.getElementById("menuGameButton");
 
 // const announceThree = document.getElementById("announceThree");
 // const announceFour = document.getElementById("announceFour");
 
 // start of game
-let gameRunning = true;
+let gameRunning = false;
 
 //Player scout info
 let scoutPlaced = false;
@@ -50,15 +55,48 @@ function updateInfo() {
   // notes.innerHTML = "info: ";
 }
 
+//main menu buttons
+start.addEventListener("click", playFunc);
+
+howTo.addEventListener("click", function () {
+  howToPlayInstructions.style.display = "inline";
+});
+
+exitInstructions.addEventListener("click", function () {
+  howToPlayInstructions.style.display = "none";
+});
+
+menuGameButton.addEventListener("click", function () {
+  gameRunning = false;
+  start.style.display = "inline";
+  start.innerHTML = "Resume";
+  howTo.style.display = "inline";
+  document.getElementById("restartDiv").style.display = "inline";
+  document.getElementById("restartDiv").style.top = "60vh";
+});
+
+function playFunc() {
+  gameRunning = true;
+  start.style.display = "none";
+  howTo.style.display = "none";
+  menuGameButton.style.display = "inline";
+  document.getElementById("headingsText").innerHTML =
+    "select artillery starting location";
+  document.getElementById("restartDiv").style.display = "none";
+}
+
 //restart game function
 restart.addEventListener("click", restartFunc);
+
 function restartFunc() {
   //resart game
   gameRunning = true;
   //reset squares
+  start.style.display = "none";
+  howTo.style.display = "none";
   document.getElementById("restartDiv").style.display = "none";
   document.getElementById("headingsText").innerHTML =
-  "select artillery starting location";
+    "select artillery starting location";
   for (let i = 0; i < squares.length; i++) {
     squares[i].className = "square";
     // squares[i].innerHTML = "";
@@ -87,6 +125,10 @@ function restartFunc() {
   computerTankMoved = false;
   // Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
   // // updateInfo();
+  var e = document.getElementsByClassName("square");
+  for (var x = 0; x < e.length; x++) {
+    e[x].style.cursor = "";
+  }
 }
 
 //place units
@@ -1059,8 +1101,6 @@ function gameOver() {
 // updateInfo();
 
 //starting announcement
-document.getElementById("headingsText").innerHTML =
-  "select artillery starting location";
 
 // game loop
 for (let i = 0; i < squares.length; i++) {

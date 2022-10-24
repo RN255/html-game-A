@@ -10,7 +10,7 @@ body {
   background-color: black;
 }
 
-.headings {
+#headings {
   /* display: grid; */
   /* grid-template-columns: auto auto auto; */
   /* background-color: #2196f320; */
@@ -26,6 +26,94 @@ body {
   padding: 5px;
   color: white;
   font-size: 25px;
+}
+
+#MainHeadings {
+  /* display: grid; */
+  /* grid-template-columns: auto auto auto; */
+  /* background-color: #2196f320; */
+  background-image: url(/images/camo.jpg);
+  height: 100px;
+  width: 540px;
+  margin: 10px auto;
+  border-radius: 5px;
+}
+
+#MainHeadingsText {
+  text-align: center;
+  padding: 10px;
+  color: white;
+  font-size: 50px;
+}
+
+#mainButtonContainer {
+  width: 50%;
+  margin: 50px auto;
+  text-align: center;
+
+  position: fixed;
+  top: 40vh;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  display: inline;
+}
+
+.mainButton {
+  padding: 25px;
+  background-image: url(/images/camo.jpg);
+  color: white;
+  font-size: 30px;
+  text-transform: uppercase;
+  margin: 0 25px;
+  display: inline;
+}
+
+#howToPlayInstructions {
+  position: fixed;
+  top: 20%;
+  width: 100%;
+  margin: auto;
+  display: none;
+  text-align: center;
+}
+
+#instructionsBox {
+  color: white;
+  background-image: url(/images/camo.jpg);
+  text-align: center;
+  width: 40%;
+  margin: auto;
+  height: 400px;
+}
+
+#instructions {
+  padding: 10px;
+}
+
+#exitInstructions {
+  padding: 5px 25px;
+  background-image: url(/images/camo.jpg);
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+#menuGame {
+  position: fixed;
+  top: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+#menuGameButton {
+  padding: 5px;
+  background-image: url(/images/camo.jpg);
+  color: white;
+  font-size: 15px;
+  text-transform: uppercase;
+  margin-left: 475px;
+  display: none;
 }
 
 .grid {
