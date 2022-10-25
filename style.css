@@ -644,7 +644,7 @@ body {
   }
 
   #menuGameButton {
-    padding: 0px;
+    padding: 1px;
     font-size: 10px;
     margin-left: 80vw;
   }
@@ -655,7 +655,7 @@ body {
 
   .square {
     width: 9.6vw;
-    height: 7vh;
+    height: 5vh;
     margin: 0.2vw;
   }
 
