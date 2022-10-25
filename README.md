@@ -1,5 +1,7 @@
 # Shoot and Scoot HTML game
 
+HTML game - play at: https://rn255.github.io/html-game-A/
+
 ## Ideas for further development - second game
 
 ### gameplay
