@@ -675,42 +675,49 @@ body {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
   }
 
   .placedScout {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
   }
 
   .computerTank {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
   }
 
   .computerScout {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
   }
 
   .explosionHit {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
   }
 
   .explosionHitPlayerUnits {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
   }
 
   .explosionMiss {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
   }
 
   /* movement animations for playerscout */
@@ -718,48 +725,64 @@ body {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(-10vw);
   }
 
   .transR {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(10vw);
   }
 
   .transU {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(0, -5.2vh);
   }
 
   .transUR {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(10vw, -5.2vh);
   }
 
   .transUL {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(-10vw, -5.2vh);
   }
 
   .transD {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(0, 5.2vh);
   }
 
   .transDR {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(10vw, 5.2vh);
   }
 
   .transDL {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(-10vw, 5.2vh);
   }
 
   /* movement animations for player tank */
@@ -767,48 +790,64 @@ body {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(-10vw);
   }
 
   .transRTank {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(10vw);
   }
 
   .transUTank {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(0, -5.2vh);
   }
 
   .transURTank {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(10vw, -5.2vh);
   }
 
   .transULTank {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(-10vw, -5.2vh);
   }
 
   .transDTank {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(0, 5.2vh);
   }
 
   .transDRTank {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(10vw, 5.2vh);
   }
 
   .transDLTank {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(-10vw, 5.2vh);
   }
 
   /* movement animations for computer scout */
@@ -816,48 +855,64 @@ body {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(-10vw);
   }
 
   .transRCS {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(10vw);
   }
 
   .transUCS {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(0, -5.2vh);
   }
 
   .transURCS {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(10vw, -5.2vh);
   }
 
   .transULCS {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(-10vw, -5.2vh);
   }
 
   .transDCS {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(0, 5.2vh);
   }
 
   .transDRCS {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(10vw, 5.2vh);
   }
 
   .transDLCS {
     width: 9.6vw;
     height: 5vh;
     margin: 0.2vw;
+    background-size: cover;
+    transform: translate(-10vw, 5.2vh);
   }
 
   #restartDiv {
