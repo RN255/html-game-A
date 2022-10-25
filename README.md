@@ -1,10 +1,4 @@
-# html-game-A
-
-Shoot and Scoot HTML game
-
-## TODO list
-
-- clean up the code
+# Shoot and Scoot HTML game
 
 ## Ideas for further development - second game
 
@@ -24,5 +18,5 @@ Shoot and Scoot HTML game
 
 ### coding
 
-- using classes would amke it easier, especially with more units
-- using a grib with X and Y instead of numbers 0 to 99
+- using classes would make it easier, especially with more units
+- using a grid with X and Y instead of numbers 0 to 99
