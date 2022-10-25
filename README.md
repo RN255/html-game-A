@@ -1,8 +1,8 @@
 # html-game-A
 
-creating a html game
+Shoot and Scoot HTML game
 
-- TODO list
+-- TODO list
 
 - clean up the code
 
