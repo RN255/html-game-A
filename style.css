@@ -28,31 +28,13 @@ body {
   font-size: 25px;
 }
 
-#MainHeadings {
-  /* display: grid; */
-  /* grid-template-columns: auto auto auto; */
-  /* background-color: #2196f320; */
-  background-image: url(/images/camo.jpg);
-  height: 100px;
-  width: 540px;
-  margin: 10px auto;
-  border-radius: 5px;
-}
-
-#MainHeadingsText {
-  text-align: center;
-  padding: 10px;
-  color: white;
-  font-size: 50px;
-}
-
 #mainButtonContainer {
   width: 50%;
   margin: 50px auto;
   text-align: center;
 
   position: fixed;
-  top: 40vh;
+  top: 250px;
   width: 100%;
   margin: auto;
   text-align: center;
@@ -71,7 +53,7 @@ body {
 
 #howToPlayInstructions {
   position: fixed;
-  top: 20%;
+  top: 100px;
   width: 100%;
   margin: auto;
   display: none;
@@ -82,13 +64,22 @@ body {
   color: white;
   background-image: url(/images/camo.jpg);
   text-align: center;
-  width: 40%;
+  width: 60%;
   margin: auto;
-  height: 400px;
+  /* height: 400px; */
 }
 
 #instructions {
-  padding: 10px;
+  padding: 25px;
+}
+
+#instructions p {
+  text-align: left;
+}
+
+#instructions .endOfInstructions {
+  text-align: center;
+  font-weight: bold;
 }
 
 #exitInstructions {
@@ -97,6 +88,7 @@ body {
   color: white;
   font-size: 20px;
   text-transform: uppercase;
+  margin-bottom: 15px;
 }
 
 #menuGame {
@@ -233,6 +225,17 @@ body {
   background: url(images/explosion.png);
   background-size: contain;
   background-color: rgb(8, 130, 252);
+  width: 51px;
+  height: 51px;
+  border: solid white 0px;
+  /* border: solid #ccffcc 1px; */
+}
+
+.explosionHitPlayerUnits {
+  opacity: 1;
+  background: url(images/explosion.png);
+  background-size: contain;
+  background-color: rgb(252, 8, 8);
   width: 51px;
   height: 51px;
   border: solid white 0px;
@@ -608,7 +611,7 @@ body {
 #restartDiv {
   position: fixed;
   /* position: absolute; */
-  top: 40vh;
+  top: 275px;
   width: 100%;
   margin: auto;
   text-align: center;
@@ -624,24 +627,12 @@ body {
   text-transform: uppercase;
 }
 
-/* @keyframes left-to-right {
-  100% {
-    transform: translateX(-100%);
+@media only screen and (max-width: 600px) {
+  .mainButton {
+    font-size: 20px;
   }
-} */
 
-/* #announce {
-  color: rgb(8, 130, 252);
+  #restartButton {
+    font-size: 20px;
+  }
 }
-
-#announceTwo {
-  color: rgb(8, 130, 252);
-}
-
-#announceThree {
-  color: rgb(252, 8, 8);
-}
-
-#announceFour {
-  color: rgb(252, 8, 8);
-} */

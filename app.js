@@ -30,6 +30,7 @@ let tankMoved = 0;
 let tankHasShot = 0;
 let playerTankHp = 50;
 let playerTankAlive = true;
+let playerTankLastKnownLocation = 0;
 
 //computer scout info
 let computerScoutLocation = 0;
@@ -72,7 +73,7 @@ menuGameButton.addEventListener("click", function () {
   start.innerHTML = "Resume";
   howTo.style.display = "inline";
   document.getElementById("restartDiv").style.display = "inline";
-  document.getElementById("restartDiv").style.top = "60vh";
+  document.getElementById("restartDiv").style.top = "375px";
 });
 
 function playFunc() {
@@ -86,7 +87,14 @@ function playFunc() {
 }
 
 //restart game function
-restart.addEventListener("click", restartFunc);
+restart.addEventListener("click", function () {
+  restart.innerHTML = "Restarting...";
+  if (computerTankAlive == false || playerTankAlive == false) {
+    restartFunc();
+  } else {
+    setTimeout(restartFunc, 3000);
+  }
+});
 
 function restartFunc() {
   //resart game
@@ -111,7 +119,8 @@ function restartFunc() {
   tankLocation = 0;
   tankMoved = 0;
   tankHasShot = 0;
-  playerTankHp = 100;
+  playerTankHp = 50;
+  playerTankAlive = true;
   //reset computer scout info
   computerScoutMoved = false;
   computerScoutLocation = 0;
@@ -129,6 +138,7 @@ function restartFunc() {
   for (var x = 0; x < e.length; x++) {
     e[x].style.cursor = "";
   }
+  restart.innerHTML = "Restart";
 }
 
 //place units
@@ -139,6 +149,7 @@ function playerPlaceTank(i) {
   // squares[i].innerHTML = "player tank";
   tankLocation = i;
   // WhereCanIMove();
+  playerTankLastKnownLocation = i;
 }
 
 // computer places tank
@@ -180,7 +191,7 @@ function compPlaceTank() {
 
 //player places scout
 function playerPlaceScout(i) {
-  if (squares[i].className == "square") {
+  if (squares[i].className == "square" && i != computerTankLocation) {
     squares[i].className = "placedScout";
     scoutPlaced = true;
     // squares[i].innerHTML = "player scout";
@@ -348,6 +359,7 @@ function scoutMove(i) {
 function tankMove(i) {
   function completeTurn() {
     squares[tankLocation].className = "square";
+    playerTankLastKnownLocation = tankLocation;
     // squares[tankLocation].innerHTML = "";
     squares[i].className = "placedTank";
     // squares[i].innerHTML = "player scout";
@@ -410,22 +422,28 @@ function tankMove(i) {
 
 function squareHit(i) {
   function removeExplosion() {
-    switch (squares[i].className) {
-      case "computerTank explosionHit":
-        squares[i].className = "computerTank";
-        break;
-      case "computerScout explosionHit":
-        squares[i].className = "computerScout";
-        break;
-      case "square explosionMiss":
-        squares[i].className = "square";
-        break;
-      case "placedTank explosionHit":
-        squares[i].className = "placedTank";
-        break;
-      case "placedScout explosionHit":
-        squares[i].className = "placedScout";
-        break;
+    if (computerTankAlive == false) {
+      squares[i].className = "computerTank explosionHit";
+    } else if (playerTankAlive == false) {
+      squares[i].className = "placedTank explosionHitPlayerUnits";
+    } else {
+      switch (squares[i].className) {
+        case "computerTank explosionHit":
+          squares[i].className = "computerTank";
+          break;
+        case "computerScout explosionHit":
+          squares[i].className = "computerScout";
+          break;
+        case "square explosionMiss":
+          squares[i].className = "square";
+          break;
+        case "placedTank explosionHitPlayerUnits":
+          squares[i].className = "placedTank";
+          break;
+        case "placedScout explosionHitPlayerUnits":
+          squares[i].className = "placedScout";
+          break;
+      }
     }
   }
 
@@ -443,11 +461,11 @@ function squareHit(i) {
       setTimeout(removeExplosion, 500);
       break;
     case "placedTank":
-      squares[i].className = "placedTank explosionHit";
+      squares[i].className = "placedTank explosionHitPlayerUnits";
       setTimeout(removeExplosion, 500);
       break;
     case "placedScout":
-      squares[i].className = "placedScout explosionHit";
+      squares[i].className = "placedScout explosionHitPlayerUnits";
       setTimeout(removeExplosion, 500);
       break;
   }
@@ -456,7 +474,7 @@ function squareHit(i) {
     squares[i].className = "square";
   }
 
-  if (i == computerTankLocation && squares[i].className == "square") {
+  if (i == computerTankLocation) {
     squares[i].className = "computerTank explosionHit";
     setTimeout(removeHiddenTankExplosion, 500);
   }
@@ -531,42 +549,198 @@ function tankShoot(i) {
   }
 }
 
-// computer shoot tank
 function computerTankShoot() {
   if (computerTankAlive == true) {
     squares[computerTankLocation].className = "computerTank";
 
-    let rand = Math.floor(Math.random() * 100);
-
-    if (squares[rand].className == "placedTank") {
-      playerTankHp -= 50;
-      // Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
-      squareHit(rand);
-      // updateInfo();
-      CheckPlayerTankAlive(rand);
-      gameOver();
-      computerTankHasShot++;
-      setTimeout(CompueterTankMove, 500);
-    } else if (squares[rand].className == "placedScout") {
-      playerScoutHp -= 50;
-      // scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
-      squareHit(rand);
-      // updateInfo();
-      CheckPlayerScoutAlive(rand);
-      gameOver();
-      computerTankHasShot++;
-      setTimeout(CompueterTankMove, 500);
+    if ((playerTankLastKnownLocation + 1) % 10 == 0) {
+      const optionOne = [-1, 10, -10, 9, -11];
+      var index = Math.floor(Math.random() * optionOne.length);
+      attackChoiceNumber = optionOne[index];
+    } else if (playerTankLastKnownLocation % 10 == 0) {
+      const optionTwo = [1, 10, -10, 11, -9];
+      var index = Math.floor(Math.random() * optionTwo.length);
+      attackChoiceNumber = optionTwo[index];
     } else {
-      //could add in effect later
-      // squares[rand].className = "clicked";
-      squareHit(rand);
-      computerTankHasShot++;
-      setTimeout(CompueterTankMove, 500);
+      const optionThree = [1, -1, 10, -10, 11, 9, -11, -9];
+      var index = Math.floor(Math.random() * optionThree.length);
+      attackChoiceNumber = optionThree[index];
+    }
+
+    let attackChoice = playerTankLastKnownLocation + attackChoiceNumber;
+
+    if (attackChoice >= 0 && attackChoice <= 99 && attackChoice != computerTankLocation && attackChoice != computerScoutLocation) {
+      if (squares[attackChoice].className == "placedTank") {
+        playerTankHp -= 50;
+        // Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
+        squareHit(attackChoice);
+        // updateInfo();
+        CheckPlayerTankAlive(attackChoice);
+        if (gameOver()) {
+          document.getElementById("headingsText").innerHTML =
+            "artillery destroyed - You lose!";
+        }
+        computerTankHasShot++;
+        setTimeout(CompueterTankMove, 500);
+      } else if (squares[attackChoice].className == "placedScout") {
+        playerScoutHp -= 50;
+        // scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
+        squareHit(attackChoice);
+        // updateInfo();
+        CheckPlayerScoutAlive(attackChoice);
+        if (gameOver()) {
+          document.getElementById("headingsText").innerHTML =
+            "artillery destroyed - You lose!";
+        }
+        computerTankHasShot++;
+        setTimeout(CompueterTankMove, 500);
+      } else {
+        //could add in effect later
+        // squares[rand].className = "clicked";
+        squareHit(attackChoice);
+        computerTankHasShot++;
+        setTimeout(CompueterTankMove, 500);
+      }
+    } else {
+      computerTankShoot();
     }
   } else {
     setTimeout(CompueterTankMove, 500);
   }
 }
+
+// // note to help with computer tank shoot
+// if ((playerTankLastKnownLocation + 1) % 10 == 0) {
+
+//   function CompueterTankMove() {
+//     if (computerTankAlive == true) {
+//       let moveChoiceNumber = 0;
+//       // set movement options depending on unit location and get choice
+//       if ((computerTankLocation + 1) % 10 == 0) {
+//         const optionOne = [-1, 10, -10, 9, -11];
+//         var index = Math.floor(Math.random() * optionOne.length);
+//         moveChoiceNumber = optionOne[index];
+//       } else if (computerTankLocation % 10 == 0) {
+//         const optionTwo = [1, 10, -10, 11, -9];
+//         var index = Math.floor(Math.random() * optionTwo.length);
+//         moveChoiceNumber = optionTwo[index];
+//       } else {
+//         const optionThree = [1, -1, 10, -10, 11, 9, -11, -9];
+//         var index = Math.floor(Math.random() * optionThree.length);
+//         moveChoiceNumber = optionThree[index];
+//       }
+//       //detemine movement choice
+//       let moveChoice = computerTankLocation + moveChoiceNumber;
+//       // check move is possible
+//       if (
+//         moveChoice >= 0 &&
+//         moveChoice <= 99 &&
+//         squares[moveChoice].className == "square" &&
+//         moveChoice != computerScoutLocation
+//       ) {
+//         // Hpannounce.innerHTML =
+//         // moveChoice + " " + tankLocation + " " + scoutLocation;
+//         // scoutHpannounce.innerHTML = "i ran";
+//         // announceThree.innerHTML = "Player Tank HP: " + playerTankHp;
+//         // announceFour.innerHTML = "Player Tank HP: " + playerScoutHp;
+//         // notes.innerHTML = "info: ";
+
+//         squares[computerTankLocation].className = "square";
+//         // squares[computerTankLocation].innerHTML = "";
+//         //
+
+//         // WTF when the below is on it doesnt do it...
+//         // squares[moveChoice].className = "computerTank";
+//         // squares[moveChoice].innerHTML = "computer tank";
+//         computerTankLocation = moveChoice;
+//         // announceThree.innerHTML = computerTankLocation;
+
+//         WhereCanIMoveScout();
+//         revealArtillery();
+//         tankRevealArtillery();
+//         resetMove();
+//         document.getElementById("headingsText").innerHTML = "move scout";
+//       } else {
+//         CompueterTankMove();
+//       }
+//     } else {
+//       resetMove();
+//     }
+//   }
+
+// // computer shoot tank
+// function computerTankShoot() {
+//   if (computerTankAlive == true) {
+//     squares[computerTankLocation].className = "computerTank";
+
+//     let rand = Math.floor(Math.random() * 100);
+
+//     if (squares[rand].className == "placedTank") {
+//       playerTankHp -= 50;
+//       // Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
+//       squareHit(rand);
+//       // updateInfo();
+//       CheckPlayerTankAlive(rand);
+//       gameOver();
+//       computerTankHasShot++;
+//       setTimeout(CompueterTankMove, 500);
+//     } else if (squares[rand].className == "placedScout") {
+//       playerScoutHp -= 50;
+//       // scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
+//       squareHit(rand);
+//       // updateInfo();
+//       CheckPlayerScoutAlive(rand);
+//       gameOver();
+//       computerTankHasShot++;
+//       setTimeout(CompueterTankMove, 500);
+//     } else {
+//       //could add in effect later
+//       // squares[rand].className = "clicked";
+//       squareHit(rand);
+//       computerTankHasShot++;
+//       setTimeout(CompueterTankMove, 500);
+//     }
+//   } else {
+//     setTimeout(CompueterTankMove, 500);
+//   }
+// }
+
+// // computer shoot tank
+// function computerTankShoot() {
+//   if (computerTankAlive == true) {
+//     squares[computerTankLocation].className = "computerTank";
+
+//     let rand = Math.floor(Math.random() * 100);
+
+//     if (squares[rand].className == "placedTank") {
+//       playerTankHp -= 50;
+//       // Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
+//       squareHit(rand);
+//       // updateInfo();
+//       CheckPlayerTankAlive(rand);
+//       gameOver();
+//       computerTankHasShot++;
+//       setTimeout(CompueterTankMove, 500);
+//     } else if (squares[rand].className == "placedScout") {
+//       playerScoutHp -= 50;
+//       // scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
+//       squareHit(rand);
+//       // updateInfo();
+//       CheckPlayerScoutAlive(rand);
+//       gameOver();
+//       computerTankHasShot++;
+//       setTimeout(CompueterTankMove, 500);
+//     } else {
+//       //could add in effect later
+//       // squares[rand].className = "clicked";
+//       squareHit(rand);
+//       computerTankHasShot++;
+//       setTimeout(CompueterTankMove, 500);
+//     }
+//   } else {
+//     setTimeout(CompueterTankMove, 500);
+//   }
+// }
 
 // // change location of tank
 // function tankMove(i) {
@@ -958,7 +1132,7 @@ function CompueterScoutMove() {
 
 //computer tank move
 function CompueterTankMove() {
-  if (computerTankAlive == true) {
+  if (computerTankAlive == true && gameRunning == true) {
     let moveChoiceNumber = 0;
     // set movement options depending on unit location and get choice
     if ((computerTankLocation + 1) % 10 == 0) {
@@ -1046,7 +1220,7 @@ function canUnitMove(i, unitLocation) {
 function tankAlive(i) {
   if (computerTankHp <= 0) {
     // Hpannounce.innerHTML = "Tank HP: Tank is dead!";
-    squares[i].className = "square";
+    // squares[i].className = "computerTank explosionHit";
     // squares[i].innerHTML = "";
     computerTankAlive = false;
   }
@@ -1056,7 +1230,7 @@ function tankAlive(i) {
 function scoutAlive(i) {
   if (computerScoutHp <= 0) {
     // scoutHpannounce.innerHTML = "Scout HP: Scout is dead!";
-    squares[i].className = "square";
+    // squares[i].className = "square";
     // squares[i].innerHTML = "";
     computerScoutAlive = false;
   }
@@ -1066,7 +1240,7 @@ function scoutAlive(i) {
 function CheckPlayerTankAlive(i) {
   if (playerTankHp <= 0) {
     // announceThree.innerHTML = "Player Tank HP: Tank is dead!";
-    squares[i].className = "square";
+    // squares[i].className = "square";
     // squares[i].innerHTML = "";
     playerTankAlive = false;
   }
@@ -1076,19 +1250,20 @@ function CheckPlayerTankAlive(i) {
 function CheckPlayerScoutAlive(i) {
   if (playerScoutHp <= 0) {
     // announceFour.innerHTML = "Player Scout HP: Scout is dead!";
-    squares[i].className = "square";
+    // squares[i].className = "square";
     // squares[i].innerHTML = "";
     playerScoutAlive = false;
   }
 }
 
 function displayRestart() {
+  document.getElementById("restartDiv").style.top = "275px";
   document.getElementById("restartDiv").style.display = "inline";
 }
 
 //check for game over
 function gameOver() {
-  if (computerTankHp <= 0) {
+  if (computerTankHp <= 0 || playerTankHp <= 0) {
     // scoutHpannounce.innerHTML = "Scout HP: Scout is dead! - GAME OVER DUDE!";
     clearNearBy();
     gameRunning = false;
