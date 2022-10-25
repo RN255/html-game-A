@@ -9,7 +9,6 @@ const howTo = document.getElementById("howTo");
 const howToPlayInstructions = document.getElementById("howToPlayInstructions");
 const exitInstructions = document.getElementById("exitInstructions");
 const menuGameButton = document.getElementById("menuGameButton");
-
 // const announceThree = document.getElementById("announceThree");
 // const announceFour = document.getElementById("announceFour");
 
@@ -178,15 +177,6 @@ function compPlaceTank() {
   } else {
     compPlaceTank();
   }
-
-  // let rand = Math.floor(Math.random() * 100);
-  // if (squares[rand].className == "square") {
-  //   // squares[rand].className = "computerTank";
-  //   // squares[rand].innerHTML = "computer tank";
-  //   computerTankLocation = rand;
-  // } else {
-  //   compPlaceTank();
-  // }
 }
 
 //player places scout
@@ -217,14 +207,6 @@ function compPlaceScout() {
     placementAttempt = tankLocation + tankPlacementChoiceNumber;
   }
 
-  // const optionsList = [
-  //   +32, +35, +37, +41, +53, +69, -32, -35, -37, -41, -53, -69,
-  // ];
-  // var index = Math.floor(Math.random() * optionsList.length);
-  // scoutPlacementChoiceNumber = optionsList[index];
-  // let placementAttempt = tankLocation + scoutPlacementChoiceNumber;
-  // notes.innerHTML = tankPlacementChoiceNumber + " " + placementAttempt;
-
   if (0 <= placementAttempt <= 99) {
     if (squares[placementAttempt].className == "square") {
       // notes.innerHTML = "we also got here";
@@ -241,18 +223,6 @@ function compPlaceScout() {
   } else {
     compPlaceScout();
   }
-
-  // let rand = Math.floor(Math.random() * 100);
-  // if (squares[rand].className == "square") {
-  //   squares[rand].className = "computerScout";
-  //   // squares[rand].innerHTML = "computer scout";
-  //   computerScoutLocation = rand;
-  //   WhereCanIMoveScout();
-  //   revealArtillery();
-  //   tankRevealArtillery();
-  // } else {
-  //   compPlaceScout();
-  // }
 }
 
 function crosshairCursorOn() {
@@ -569,7 +539,12 @@ function computerTankShoot() {
 
     let attackChoice = playerTankLastKnownLocation + attackChoiceNumber;
 
-    if (attackChoice >= 0 && attackChoice <= 99 && attackChoice != computerTankLocation && attackChoice != computerScoutLocation) {
+    if (
+      attackChoice >= 0 &&
+      attackChoice <= 99 &&
+      attackChoice != computerTankLocation &&
+      attackChoice != computerScoutLocation
+    ) {
       if (squares[attackChoice].className == "placedTank") {
         playerTankHp -= 50;
         // Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
@@ -608,162 +583,6 @@ function computerTankShoot() {
     setTimeout(CompueterTankMove, 500);
   }
 }
-
-// // note to help with computer tank shoot
-// if ((playerTankLastKnownLocation + 1) % 10 == 0) {
-
-//   function CompueterTankMove() {
-//     if (computerTankAlive == true) {
-//       let moveChoiceNumber = 0;
-//       // set movement options depending on unit location and get choice
-//       if ((computerTankLocation + 1) % 10 == 0) {
-//         const optionOne = [-1, 10, -10, 9, -11];
-//         var index = Math.floor(Math.random() * optionOne.length);
-//         moveChoiceNumber = optionOne[index];
-//       } else if (computerTankLocation % 10 == 0) {
-//         const optionTwo = [1, 10, -10, 11, -9];
-//         var index = Math.floor(Math.random() * optionTwo.length);
-//         moveChoiceNumber = optionTwo[index];
-//       } else {
-//         const optionThree = [1, -1, 10, -10, 11, 9, -11, -9];
-//         var index = Math.floor(Math.random() * optionThree.length);
-//         moveChoiceNumber = optionThree[index];
-//       }
-//       //detemine movement choice
-//       let moveChoice = computerTankLocation + moveChoiceNumber;
-//       // check move is possible
-//       if (
-//         moveChoice >= 0 &&
-//         moveChoice <= 99 &&
-//         squares[moveChoice].className == "square" &&
-//         moveChoice != computerScoutLocation
-//       ) {
-//         // Hpannounce.innerHTML =
-//         // moveChoice + " " + tankLocation + " " + scoutLocation;
-//         // scoutHpannounce.innerHTML = "i ran";
-//         // announceThree.innerHTML = "Player Tank HP: " + playerTankHp;
-//         // announceFour.innerHTML = "Player Tank HP: " + playerScoutHp;
-//         // notes.innerHTML = "info: ";
-
-//         squares[computerTankLocation].className = "square";
-//         // squares[computerTankLocation].innerHTML = "";
-//         //
-
-//         // WTF when the below is on it doesnt do it...
-//         // squares[moveChoice].className = "computerTank";
-//         // squares[moveChoice].innerHTML = "computer tank";
-//         computerTankLocation = moveChoice;
-//         // announceThree.innerHTML = computerTankLocation;
-
-//         WhereCanIMoveScout();
-//         revealArtillery();
-//         tankRevealArtillery();
-//         resetMove();
-//         document.getElementById("headingsText").innerHTML = "move scout";
-//       } else {
-//         CompueterTankMove();
-//       }
-//     } else {
-//       resetMove();
-//     }
-//   }
-
-// // computer shoot tank
-// function computerTankShoot() {
-//   if (computerTankAlive == true) {
-//     squares[computerTankLocation].className = "computerTank";
-
-//     let rand = Math.floor(Math.random() * 100);
-
-//     if (squares[rand].className == "placedTank") {
-//       playerTankHp -= 50;
-//       // Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
-//       squareHit(rand);
-//       // updateInfo();
-//       CheckPlayerTankAlive(rand);
-//       gameOver();
-//       computerTankHasShot++;
-//       setTimeout(CompueterTankMove, 500);
-//     } else if (squares[rand].className == "placedScout") {
-//       playerScoutHp -= 50;
-//       // scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
-//       squareHit(rand);
-//       // updateInfo();
-//       CheckPlayerScoutAlive(rand);
-//       gameOver();
-//       computerTankHasShot++;
-//       setTimeout(CompueterTankMove, 500);
-//     } else {
-//       //could add in effect later
-//       // squares[rand].className = "clicked";
-//       squareHit(rand);
-//       computerTankHasShot++;
-//       setTimeout(CompueterTankMove, 500);
-//     }
-//   } else {
-//     setTimeout(CompueterTankMove, 500);
-//   }
-// }
-
-// // computer shoot tank
-// function computerTankShoot() {
-//   if (computerTankAlive == true) {
-//     squares[computerTankLocation].className = "computerTank";
-
-//     let rand = Math.floor(Math.random() * 100);
-
-//     if (squares[rand].className == "placedTank") {
-//       playerTankHp -= 50;
-//       // Hpannounce.innerHTML = "Tank HP: "+ computerTankHp;
-//       squareHit(rand);
-//       // updateInfo();
-//       CheckPlayerTankAlive(rand);
-//       gameOver();
-//       computerTankHasShot++;
-//       setTimeout(CompueterTankMove, 500);
-//     } else if (squares[rand].className == "placedScout") {
-//       playerScoutHp -= 50;
-//       // scoutHpannounce.innerHTML = "Scout HP: "+ computerScoutHp;
-//       squareHit(rand);
-//       // updateInfo();
-//       CheckPlayerScoutAlive(rand);
-//       gameOver();
-//       computerTankHasShot++;
-//       setTimeout(CompueterTankMove, 500);
-//     } else {
-//       //could add in effect later
-//       // squares[rand].className = "clicked";
-//       squareHit(rand);
-//       computerTankHasShot++;
-//       setTimeout(CompueterTankMove, 500);
-//     }
-//   } else {
-//     setTimeout(CompueterTankMove, 500);
-//   }
-// }
-
-// // change location of tank
-// function tankMove(i) {
-//   if (canUnitMove(i, tankLocation) && squares[i].className == "nearBy") {
-//     squares[tankLocation].className = "square";
-//     squares[tankLocation].innerHTML = "";
-//     squares[i].className = "placedTank";
-//     // squares[i].innerHTML = "player tank";
-//     tankLocation = i;
-//     tankMoved++;
-//     clearNearBy();
-//     tankRevealArtillery();
-
-//     // WhereCanIMove();
-//     // computer moves scout then turn is reset
-//     // is this the best place to put this?
-//     setTimeout(CompueterScoutMove, 500);
-//     // setTimeout(CompueterScoutMove, 100);
-//     // resetMove();
-//   }
-// }
-
-//where can i move, and then shoot, and even see...
 
 function revealArtillery() {
   // notes.innerHTML = "reveal ran";
@@ -920,16 +739,6 @@ function WhereCanIMoveScout() {
   }
   gameRunning = true;
   gameOver();
-
-  // if ((tankLocation + 1) % 10 == 0) {
-  //     const optionOne = [-1, 10, -10, 9, -11];
-  // }
-
-  // else if (tankLocation % 10 == 0) {
-  //     const optionTwo = [1, 10, -10, 11, -9];
-  // } else {
-  //     const optionThree = [1, -1, 10, -10, 11, 9, -11, -9];
-  // }
 }
 
 function WhereCanIMove() {
@@ -978,16 +787,6 @@ function WhereCanIMove() {
   }
   gameRunning = true;
   gameOver();
-
-  // if ((tankLocation + 1) % 10 == 0) {
-  //     const optionOne = [-1, 10, -10, 9, -11];
-  // }
-
-  // else if (tankLocation % 10 == 0) {
-  //     const optionTwo = [1, 10, -10, 11, -9];
-  // } else {
-  //     const optionThree = [1, -1, 10, -10, 11, 9, -11, -9];
-  // }
 }
 
 // computer scout move
@@ -1086,49 +885,6 @@ function CompueterScoutMove() {
     computerTankShoot();
   }
 }
-
-// //computer scout move
-// function CompueterScoutMove() {
-//   if (computerScoutAlive == true) {
-//     let moveChoiceNumber = 0;
-//     // set movement options depending on unit location and get choice
-//     if ((computerScoutLocation + 1) % 10 == 0) {
-//       const optionOne = [-1, 10, -10, 9, -11];
-//       var index = Math.floor(Math.random() * optionOne.length);
-//       moveChoiceNumber = optionOne[index];
-//     } else if (computerScoutLocation % 10 == 0) {
-//       const optionTwo = [1, 10, -10, 11, -9];
-//       var index = Math.floor(Math.random() * optionTwo.length);
-//       moveChoiceNumber = optionTwo[index];
-//     } else {
-//       const optionThree = [1, -1, 10, -10, 11, 9, -11, -9];
-//       var index = Math.floor(Math.random() * optionThree.length);
-//       moveChoiceNumber = optionThree[index];
-//     }
-//     //detemine movement choice
-//     let moveChoice = computerScoutLocation + moveChoiceNumber;
-//     // check move is possible
-//     if (moveChoice >= 0 && moveChoice <= 99) {
-//       if (
-//         squares[moveChoice].className == "square" &&
-//         moveChoice != computerTankLocation
-//       ) {
-//         squares[computerScoutLocation].className = "square";
-//         squares[computerScoutLocation].innerHTML = "";
-//         squares[moveChoice].className = "computerScout";
-//         // squares[moveChoice].innerHTML = "computer scout";
-//         computerScoutLocation = moveChoice;
-//         setTimeout(computerTankShoot, 500);
-//       } else {
-//         CompueterScoutMove();
-//       }
-//     } else {
-//       CompueterScoutMove();
-//     }
-//   } else {
-//     computerTankShoot();
-//   }
-// }
 
 //computer tank move
 function CompueterTankMove() {

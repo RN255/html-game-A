@@ -1,14 +1,8 @@
-# html-game-A
+# Shoot and Scoot HTML game
 
-creating a html game
+## Ideas for further development - second game
 
-- TODO list
-
-- clean up the code
-
-- Ideas for further development - second game
-
-- gameplay
+### gameplay
 
 - improve computer AI
 - both scout and artillery are hidden
@@ -22,7 +16,7 @@ creating a html game
 - 3d grid?
 - hexagonal grid
 
-- coding
+### coding
 
-- using classes would amke it easier, especially with more units
-- using a grib with X and Y instead of numbers 0 to 99
+- using classes would make it easier, especially with more units
+- using a grid with X and Y instead of numbers 0 to 99

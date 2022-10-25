@@ -154,10 +154,8 @@ body {
 /* margin: 1px; */
 /* border-radius: 3px; */
 /* transition: 0.5s; */
-
 /* opacity: 0.3; */
 /* background-color: #ccffcc; */
-
 /* border: solid white 1px; */
 /* } */
 
@@ -266,7 +264,6 @@ body {
   background-color: rgb(252, 8, 8);
   transition: 0.5s;
   transform: translate(-54px);
-  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transR {
@@ -280,7 +277,6 @@ body {
   background-color: rgb(252, 8, 8);
   transition: 0.5s;
   transform: translate(54px);
-  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
@@ -295,7 +291,6 @@ body {
   background-color: rgb(252, 8, 8);
   transition: 0.5s;
   transform: translate(0, -54px);
-  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transUR {
@@ -309,7 +304,6 @@ body {
   background-color: rgb(252, 8, 8);
   transition: 0.5s;
   transform: translate(54px, -54px);
-  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
@@ -324,7 +318,6 @@ body {
   background-color: rgb(252, 8, 8);
   transition: 0.5s;
   transform: translate(-54px, -54px);
-  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transD {
@@ -338,7 +331,6 @@ body {
   background-color: rgb(252, 8, 8);
   transition: 0.5s;
   transform: translate(0, 54px);
-  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
@@ -353,7 +345,6 @@ body {
   background-color: rgb(252, 8, 8);
   transition: 0.5s;
   transform: translate(54px, 54px);
-  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
@@ -368,7 +359,6 @@ body {
   background-color: rgb(252, 8, 8);
   transition: 0.5s;
   transform: translate(-54px, 54px);
-  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
@@ -384,7 +374,6 @@ body {
   background-color: rgb(252, 8, 8);
   transition: 0.5s;
   transform: translate(-54px);
-  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transRTank {
@@ -398,7 +387,6 @@ body {
   background-color: rgb(252, 8, 8);
   transition: 0.5s;
   transform: translate(54px);
-  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
@@ -413,7 +401,6 @@ body {
   background-color: rgb(252, 8, 8);
   transition: 0.5s;
   transform: translate(0, -54px);
-  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transURTank {
@@ -427,7 +414,6 @@ body {
   background-color: rgb(252, 8, 8);
   transition: 0.5s;
   transform: translate(54px, -54px);
-  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
@@ -442,7 +428,6 @@ body {
   background-color: rgb(252, 8, 8);
   transition: 0.5s;
   transform: translate(-54px, -54px);
-  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transDTank {
@@ -456,7 +441,6 @@ body {
   background-color: rgb(252, 8, 8);
   transition: 0.5s;
   transform: translate(0, 54px);
-  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
@@ -471,7 +455,6 @@ body {
   background-color: rgb(252, 8, 8);
   transition: 0.5s;
   transform: translate(54px, 54px);
-  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
@@ -486,7 +469,6 @@ body {
   background-color: rgb(252, 8, 8);
   transition: 0.5s;
   transform: translate(-54px, 54px);
-  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
@@ -502,7 +484,6 @@ body {
   background-color: rgb(8, 130, 252);
   transition: 0.5s;
   transform: translate(-54px);
-  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transRCS {
@@ -516,7 +497,6 @@ body {
   background-color: rgb(8, 130, 252);
   transition: 0.5s;
   transform: translate(54px);
-  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
@@ -531,7 +511,6 @@ body {
   background-color: rgb(8, 130, 252);
   transition: 0.5s;
   transform: translate(0, -54px);
-  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transURCS {
@@ -545,7 +524,6 @@ body {
   background-color: rgb(8, 130, 252);
   transition: 0.5s;
   transform: translate(54px, -54px);
-  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
@@ -560,7 +538,6 @@ body {
   background-color: rgb(8, 130, 252);
   transition: 0.5s;
   transform: translate(-54px, -54px);
-  /* animation: left-to-right 0.5s forwards; */
 }
 
 .transDCS {
@@ -574,7 +551,6 @@ body {
   background-color: rgb(8, 130, 252);
   transition: 0.5s;
   transform: translate(0, 54px);
-  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
@@ -589,7 +565,6 @@ body {
   background-color: rgb(8, 130, 252);
   transition: 0.5s;
   transform: translate(54px, 54px);
-  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
@@ -604,13 +579,11 @@ body {
   background-color: rgb(8, 130, 252);
   transition: 0.5s;
   transform: translate(-54px, 54px);
-  /* animation: left-to-right 0.5s forwards; */
   z-index: 1;
 }
 
 #restartDiv {
   position: fixed;
-  /* position: absolute; */
   top: 275px;
   width: 100%;
   margin: auto;
