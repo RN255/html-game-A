@@ -14,7 +14,7 @@ body {
   /* display: grid; */
   /* grid-template-columns: auto auto auto; */
   /* background-color: #2196f320; */
-  background-image: url(/images/camo.jpg);
+  background-image: url(images/camo.jpg);
   height: 50px;
   width: 540px;
   margin: 10px auto;
@@ -43,7 +43,7 @@ body {
 
 .mainButton {
   padding: 25px;
-  background-image: url(/images/camo.jpg);
+  background-image: url(images/camo.jpg);
   color: white;
   font-size: 30px;
   text-transform: uppercase;
@@ -62,7 +62,7 @@ body {
 
 #instructionsBox {
   color: white;
-  background-image: url(/images/camo.jpg);
+  background-image: url(images/camo.jpg);
   text-align: center;
   width: 60%;
   margin: auto;
@@ -84,7 +84,7 @@ body {
 
 #exitInstructions {
   padding: 5px 25px;
-  background-image: url(/images/camo.jpg);
+  background-image: url(images/camo.jpg);
   color: white;
   font-size: 20px;
   text-transform: uppercase;
@@ -100,7 +100,7 @@ body {
 
 #menuGameButton {
   padding: 5px;
-  background-image: url(/images/camo.jpg);
+  background-image: url(images/camo.jpg);
   color: white;
   font-size: 15px;
   text-transform: uppercase;
@@ -115,7 +115,7 @@ body {
   margin: auto;
   /* background-color: #ccffcc; */
   /* background-color: #ccffcc; */
-  background-image: url(/images/camo.jpg);
+  background-image: url(images/camo.jpg);
 }
 
 .square {
@@ -594,7 +594,7 @@ body {
 
 #restartButton {
   padding: 25px;
-  background-image: url(/images/camo.jpg);
+  background-image: url(images/camo.jpg);
   color: white;
   font-size: 30px;
   text-transform: uppercase;
