@@ -601,11 +601,448 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
+  * {
+    box-sizing: border-box;
+  }
+
+  #headings {
+    width: 100vw;
+  }
+
+  #headingsText {
+    padding: 12px 0px;
+    font-size: 15px;
+  }
+
+  #mainButtonContainer {
+    width: 100%;
+    margin: 0px auto;
+    top: 250px;
+  }
+
   .mainButton {
-    font-size: 20px;
+    padding: 5px;
+    font-size: 15px;
+    margin: 0px;
+  }
+
+  #instructionsBox {
+    width: 90%;
+  }
+
+  #instructions {
+    padding: 10px;
+  }
+
+  #exitInstructions {
+    font-size: 15px;
+  }
+
+  #menuGame {
+    top: 20px;
+    width: 100%;
+  }
+
+  #menuGameButton {
+    padding: 0px;
+    font-size: 10px;
+    margin-left: 80vw;
+  }
+
+  .grid {
+    width: 100vw;
+  }
+
+  .square {
+    width: 9.6vw;
+    height: 10vh;
+    margin: 0.2vw;
+  }
+
+  .nearBy {
+    width: 9.6vw;
+    height: 10vh;
+    margin: 0.2vw;
+  }
+
+  .clicked {
+    width: 9.6vw;
+    height: 10vh;
+    margin: 0.2vw;
+  }
+
+  .placedTank {
+    width: 9.6vw;
+    height: 10vh;
+    margin: 0.2vw;
+  }
+
+  .placedScout {
+    width: 9.6vw;
+    height: 10vh;
+    margin: 0.2vw;
+  }
+
+  .computerTank {
+    width: 9.6vw;
+    height: 10vh;
+    margin: 0.2vw;
+  }
+
+  .computerScout {
+    width: 9.6vw;
+    height: 10vh;
+    margin: 0.2vw;
+  }
+
+  .explosionHit {
+    width: 9.6vw;
+    height: 10vh;
+    margin: 0.2vw;
+  }
+
+  .explosionHitPlayerUnits {
+    width: 9.6vw;
+    height: 10vh;
+    margin: 0.2vw;
+  }
+
+  .explosionMiss {
+    width: 9.6vw;
+    height: 10vh;
+    margin: 0.2vw;
+  }
+
+  /* movement animations for playerscout */
+  .transL {
+    width: 9.6vw;
+    height: 10vh;
+    margin: 0.2vw;
+  }
+
+  .transR {
+    width: 9.6vw;
+    height: 10vh;
+    margin: 0.2vw;
+  }
+
+  .transU {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(252, 8, 8) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/scout.png);
+    background-size: contain;
+    background-color: rgb(252, 8, 8);
+    transition: 0.5s;
+    transform: translate(0, -54px);
+  }
+
+  .transUR {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(252, 8, 8) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/scout.png);
+    background-size: contain;
+    background-color: rgb(252, 8, 8);
+    transition: 0.5s;
+    transform: translate(54px, -54px);
+    z-index: 1;
+  }
+
+  .transUL {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(252, 8, 8) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/scout.png);
+    background-size: contain;
+    background-color: rgb(252, 8, 8);
+    transition: 0.5s;
+    transform: translate(-54px, -54px);
+  }
+
+  .transD {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(252, 8, 8) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/scout.png);
+    background-size: contain;
+    background-color: rgb(252, 8, 8);
+    transition: 0.5s;
+    transform: translate(0, 54px);
+    z-index: 1;
+  }
+
+  .transDR {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(252, 8, 8) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/scout.png);
+    background-size: contain;
+    background-color: rgb(252, 8, 8);
+    transition: 0.5s;
+    transform: translate(54px, 54px);
+    z-index: 1;
+  }
+
+  .transDL {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(252, 8, 8) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/scout.png);
+    background-size: contain;
+    background-color: rgb(252, 8, 8);
+    transition: 0.5s;
+    transform: translate(-54px, 54px);
+    z-index: 1;
+  }
+
+  /* movement animations for player tank */
+  .transLTank {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(252, 8, 8) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/Artillery-Gun-Silhouette.png);
+    background-size: contain;
+    background-color: rgb(252, 8, 8);
+    transition: 0.5s;
+    transform: translate(-54px);
+  }
+
+  .transRTank {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(252, 8, 8) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/Artillery-Gun-Silhouette.png);
+    background-size: contain;
+    background-color: rgb(252, 8, 8);
+    transition: 0.5s;
+    transform: translate(54px);
+    z-index: 1;
+  }
+
+  .transUTank {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(252, 8, 8) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/Artillery-Gun-Silhouette.png);
+    background-size: contain;
+    background-color: rgb(252, 8, 8);
+    transition: 0.5s;
+    transform: translate(0, -54px);
+  }
+
+  .transURTank {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(252, 8, 8) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/Artillery-Gun-Silhouette.png);
+    background-size: contain;
+    background-color: rgb(252, 8, 8);
+    transition: 0.5s;
+    transform: translate(54px, -54px);
+    z-index: 1;
+  }
+
+  .transULTank {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(252, 8, 8) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/Artillery-Gun-Silhouette.png);
+    background-size: contain;
+    background-color: rgb(252, 8, 8);
+    transition: 0.5s;
+    transform: translate(-54px, -54px);
+  }
+
+  .transDTank {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(252, 8, 8) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/Artillery-Gun-Silhouette.png);
+    background-size: contain;
+    background-color: rgb(252, 8, 8);
+    transition: 0.5s;
+    transform: translate(0, 54px);
+    z-index: 1;
+  }
+
+  .transDRTank {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(252, 8, 8) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/Artillery-Gun-Silhouette.png);
+    background-size: contain;
+    background-color: rgb(252, 8, 8);
+    transition: 0.5s;
+    transform: translate(54px, 54px);
+    z-index: 1;
+  }
+
+  .transDLTank {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(252, 8, 8) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/Artillery-Gun-Silhouette.png);
+    background-size: contain;
+    background-color: rgb(252, 8, 8);
+    transition: 0.5s;
+    transform: translate(-54px, 54px);
+    z-index: 1;
+  }
+
+  /* movement animations for computer scout */
+  .transLCS {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(8, 130, 252) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/scout.png);
+    background-size: contain;
+    background-color: rgb(8, 130, 252);
+    transition: 0.5s;
+    transform: translate(-54px);
+  }
+
+  .transRCS {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(8, 130, 252) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/scout.png);
+    background-size: contain;
+    background-color: rgb(8, 130, 252);
+    transition: 0.5s;
+    transform: translate(54px);
+    z-index: 1;
+  }
+
+  .transUCS {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(8, 130, 252) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/scout.png);
+    background-size: contain;
+    background-color: rgb(8, 130, 252);
+    transition: 0.5s;
+    transform: translate(0, -54px);
+  }
+
+  .transURCS {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(8, 130, 252) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/scout.png);
+    background-size: contain;
+    background-color: rgb(8, 130, 252);
+    transition: 0.5s;
+    transform: translate(54px, -54px);
+    z-index: 1;
+  }
+
+  .transULCS {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(8, 130, 252) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/scout.png);
+    background-size: contain;
+    background-color: rgb(8, 130, 252);
+    transition: 0.5s;
+    transform: translate(-54px, -54px);
+  }
+
+  .transDCS {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(8, 130, 252) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/scout.png);
+    background-size: contain;
+    background-color: rgb(8, 130, 252);
+    transition: 0.5s;
+    transform: translate(0, 54px);
+    z-index: 1;
+  }
+
+  .transDRCS {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(8, 130, 252) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/scout.png);
+    background-size: contain;
+    background-color: rgb(8, 130, 252);
+    transition: 0.5s;
+    transform: translate(54px, 54px);
+    z-index: 1;
+  }
+
+  .transDLCS {
+    width: 50px;
+    height: 50px;
+    border: solid rgb(8, 130, 252) 1px;
+    margin: 1px;
+    border-radius: 3px;
+    background: url(images/scout.png);
+    background-size: contain;
+    background-color: rgb(8, 130, 252);
+    transition: 0.5s;
+    transform: translate(-54px, 54px);
+    z-index: 1;
+  }
+
+  #restartDiv {
+    position: fixed;
+    top: 275px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    font-size: 18px;
+    display: none;
   }
 
   #restartButton {
+    padding: 25px;
+    background-image: url(images/camo.jpg);
+    color: white;
     font-size: 20px;
+    text-transform: uppercase;
   }
 }
